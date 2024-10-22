@@ -1,20 +1,33 @@
 package org.spring.models;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "player")
 public class Player {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+
+    @Column(nullable = false)
     private String pseudo;
-    @Column
+
+    @Column(nullable = false)
     private int age;
-    @Column
-    private Long equipeId;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
+
+    public Player() {
+    }
+
+    public Player(Long id, String pseudo, int age, Team team) {
+        this.id = id;
+        this.pseudo = pseudo;
+        this.age = age;
+        this.team = team;
+    }
 
     public Long getId() {
         return id;
@@ -40,11 +53,11 @@ public class Player {
         this.age = age;
     }
 
-    public Long getEquipeId() {
-        return equipeId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setEquipeId(Long equipeId) {
-        this.equipeId = equipeId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
