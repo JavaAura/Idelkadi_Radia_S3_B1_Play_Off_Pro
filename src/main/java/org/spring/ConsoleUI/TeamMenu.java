@@ -1,11 +1,20 @@
 package org.spring.ConsoleUI;
 
+import org.spring.models.Team;
+import org.spring.services.TeamService;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class TeamMenu {
-    public static Scanner scanner;
+    private static Scanner scanner;
+    private static TeamService teamService;
 
-    public static void showTeamMenu(Scanner scan){
+    public TeamMenu(TeamService teamService) {
+        TeamMenu.teamService = teamService;
+    }
+
+    public static void showTeamMenu(Scanner scan) {
         scanner = scan;
         while (true) {
             System.out.println("=== Team Management Menu ===");
@@ -18,7 +27,7 @@ public class TeamMenu {
             System.out.print("Please select an option (1-6): ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine();  
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -37,33 +46,98 @@ public class TeamMenu {
                     searchTeam();
                     break;
                 case 6:
-                    return; 
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         }
     }
 
-    private static void searchTeam() {
-    }
+    private static void addNewTeam() {
+        System.out.println("Enter Team Name: ");
+        String name = scanner.nextLine();
 
-    private static void displayAllTeams() {
-    }
+        System.out.println("Enter Team Ranking: ");
+        int ranking = scanner.nextInt();
+        scanner.nextLine(); 
 
-    private static void deleteTeam() {
+        Team team = new Team();
+        team.setName(name);
+        team.setRanking(ranking);
+
+        boolean isAdded = teamService.addTeam(team);
+        if (isAdded) {
+            System.out.println("Team successfully added.");
+        } else {
+            System.out.println("Error adding team.");
+        }
     }
 
     private static void updateTeam() {
+        System.out.println("Enter Team ID to update: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine(); 
+
+        Team existingTeam = teamService.getTeamById(id);
+        if (existingTeam == null) {
+            System.out.println("Team not found.");
+            return;
+        }
+
+        System.out.println("Enter new Team Name (current: " + existingTeam.getName() + "): ");
+        String name = scanner.nextLine();
+
+        System.out.println("Enter new Team Ranking (current: " + existingTeam.getRanking() + "): ");
+        int ranking = scanner.nextInt();
+        scanner.nextLine(); 
+
+        existingTeam.setName(name);
+        existingTeam.setRanking(ranking);
+
+        boolean isUpdated = teamService.updateTeam(existingTeam);
+        if (isUpdated) {
+            System.out.println("Team successfully updated.");
+        } else {
+            System.out.println("Error updating team.");
+        }
     }
 
-    private static void addNewTeam() {
 
-        System.out.print("Enter team name: ");
-        String teamName = scanner.nextLine();
+    private static void deleteTeam() {
+        System.out.println("Enter Team ID to delete: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine(); 
 
-        System.out.print("Enter team ranking: ");
-        int ranking = scanner.nextInt();
+        boolean isDeleted = teamService.deleteTeam(id);
+        if (isDeleted) {
+            System.out.println("Team successfully deleted.");
+        } else {
+            System.out.println("Error deleting team.");
+        }
+    }
 
+    private static void displayAllTeams() {
+        List<Team> teams = teamService.getAllTeams();
+        if (teams.isEmpty()) {
+            System.out.println("No teams found.");
+        } else {
+            System.out.println("=== All Teams ===");
+            for (Team team : teams) {
+                System.out.println(team);
+            }
+        }
+    }
 
+    private static void searchTeam() {
+        System.out.println("Enter Team ID to search: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();
+
+        Team team = teamService.getTeamById(id);
+        if (team != null) {
+            System.out.println("Team found: " + team);
+        } else {
+            System.out.println("Team not found.");
+        }
     }
 }

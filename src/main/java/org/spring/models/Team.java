@@ -17,10 +17,10 @@ public class Team {
     @Column(nullable = true)
     private int ranking;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true , fetch = FetchType.EAGER)
     private List<Player> players;
 
-    @ManyToMany(mappedBy = "teams", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "teams", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private Set<Tournament> tournaments = new HashSet<>();
 
     public Team() {

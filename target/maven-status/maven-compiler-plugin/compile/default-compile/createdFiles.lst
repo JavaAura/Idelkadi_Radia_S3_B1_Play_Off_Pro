@@ -1,15 +1,21 @@
 org\spring\models\Team.class
+org\spring\ConsoleUI\PlayerMenu.class
+org\spring\utils\ScannerUtil.class
 org\spring\models\Game.class
 org\spring\repositories\repositoryImpl\TeamRepositoryImpl.class
 org\spring\services\TournamentService.class
 org\spring\services\serviceImpl\GameServiceImpl.class
+org\spring\Main.class
 org\spring\services\PlayerService.class
+org\spring\models\enums\TournamentStatus.class
 org\spring\services\TeamService.class
 org\spring\models\Tournament.class
+org\spring\ConsoleUI\TeamMenu.class
 org\spring\repositories\repositoryImpl\PlayerRepositoryImpl.class
 org\spring\services\serviceImpl\PlayerServiceImpl.class
 org\spring\dao\daoImpl\TournoiDaoExtension.class
 org\spring\repositories\PlayerRepository.class
+org\spring\models\enums\GameDifficulty.class
 org\spring\services\GameService.class
 org\spring\dao\TournoiDao.class
 org\spring\repositories\TournamentRepository.class
@@ -21,5 +27,4 @@ org\spring\repositories\repositoryImpl\TournamentRepositoryImpl.class
 org\spring\repositories\TeamRepository.class
 org\spring\services\serviceImpl\TournamentServiceImpl.class
 org\spring\dao\daoImpl\TournoiDaoImpl.class
-org\spring\App.class
 org\spring\utils\LoggerUtil.class

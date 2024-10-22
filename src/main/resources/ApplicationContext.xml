@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:annotation-driven />
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="tournament" />
@@ -23,60 +24,18 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 
+    <bean id="entityManager" factory-bean="entityManagerFactory" factory-method="createEntityManager" />
+    <!-- Beans for repositories -->
+    <bean id="teamRepository" class="org.spring.repositories.repositoryImpl.TeamRepositoryImpl">
+        <constructor-arg ref="entityManager" />
+    </bean>
 
+    <!-- Beans for services -->
+    <bean id="teamService" class="org.spring.services.serviceImpl.TeamServiceImpl">
+        <constructor-arg ref="teamRepository" />
+    </bean>
+
+    <bean id="teamMenu" class="org.spring.ConsoleUI.TeamMenu">
+        <constructor-arg ref="teamService"/>
+    </bean>
 </beans>
-
-
-        <!--<?xml version="1.0" encoding="UTF-8"?>-->
-        <!--<beans xmlns="http://www.springframework.org/schema/beans"-->
-        <!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-        <!--       xmlns:context="http://www.springframework.org/schema/context"-->
-        <!--       xmlns:tx="http://www.springframework.org/schema/tx"-->
-        <!--       xsi:schemaLocation="-->
-        <!--           http://www.springframework.org/schema/beans-->
-        <!--           http://www.springframework.org/schema/beans/spring-beans.xsd-->
-        <!--           http://www.springframework.org/schema/tx-->
-        <!--           http://www.springframework.org/schema/tx/spring-tx.xsd">-->
-
-        <!--    &lt;!&ndash; Enable Spring to automatically manage transactions &ndash;&gt;-->
-        <!--    <tx:annotation-driven/>-->
-
-
-        <!--    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-        <!--        <property name="persistenceUnitName" value="tournament" />-->
-        <!--        <property name="dataSource" ref="dataSource" />-->
-        <!--        <property name="jpaVendorAdapter">-->
-        <!--            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />-->
-        <!--        </property>-->
-        <!--    </bean>-->
-        <!--    &lt;!&ndash; DataSource configuration for H2 database &ndash;&gt;-->
-        <!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--        <property name="driverClassName" value="org.h2.Driver"/>-->
-        <!--        <property name="url" value="jdbc:h2:~/tournament_db"/>-->
-        <!--        <property name="username" value="sa"/>-->
-        <!--        <property name="password" value=""/>-->
-        <!--    </bean>-->
-
-        <!--    &lt;!&ndash; Transaction manager &ndash;&gt;-->
-        <!--    <bean id="entityManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
-        <!--        <property name="entityManagerFactory" ref="entityManagerFactory"/>-->
-        <!--    </bean>-->
-
-
-
-        <!--    &lt;!&ndash; Game Service Bean &ndash;&gt;-->
-        <!--&lt;!&ndash;    <bean id="gameService" class="">&ndash;&gt;-->
-        <!--&lt;!&ndash;        <constructor-arg ref="gameDao" />&ndash;&gt;-->
-        <!--&lt;!&ndash;    </bean>&ndash;&gt;-->
-
-        <!--    &lt;!&ndash; DAO and Service Beans (Example with Tournoi) &ndash;&gt;-->
-        <!--&lt;!&ndash;    <bean id="tournamentDao" class="com.gameDev.dao.impl.TournamentDaoImpl"/>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;    <bean id="tournamentService" class="com.gameDev.service.impl.TournamentServiceImpl">&ndash;&gt;-->
-        <!--&lt;!&ndash;        <property name="tournamentDao" ref="tournamentDao"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;    </bean>&ndash;&gt;-->
-
-        <!--</beans>-->
-
-
-

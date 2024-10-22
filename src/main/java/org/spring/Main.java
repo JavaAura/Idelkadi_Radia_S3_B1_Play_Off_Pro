@@ -28,6 +28,8 @@ public class Main {
 
             switch (choice) {
                 case 1:
+                    ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+                    TeamMenu teamMenu = (TeamMenu) context.getBean("teamMenu");
                     TeamMenu.showTeamMenu(scanner);
                     break;
                 case 2:
@@ -46,7 +48,6 @@ public class Main {
     public static void main(String[] args) {
         showMainMenu();
         scanner.close();
-
     }
 
 //    EntityManagerFactory emf = Persistence.createEntityManagerFactory("tournament");
