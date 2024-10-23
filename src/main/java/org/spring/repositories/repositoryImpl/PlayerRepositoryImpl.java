@@ -2,18 +2,18 @@ package org.spring.repositories.repositoryImpl;
 
 import org.spring.models.Player;
 import org.spring.repositories.PlayerRepository;
+import org.spring.utils.EntityManagerSingleton;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 public class PlayerRepositoryImpl implements PlayerRepository {
 
-    private final EntityManager entityManager;
 
-    public PlayerRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    private EntityManager entityManager;
+    public PlayerRepositoryImpl() {
+        this.entityManager = EntityManagerSingleton.getInstance().getEntityManager();
     }
-
     @Override
     public boolean save(Player player) {
         try {

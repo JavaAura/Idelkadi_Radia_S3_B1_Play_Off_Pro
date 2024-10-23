@@ -64,4 +64,15 @@ public class Team {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ranking=" + ranking +
+                ", players=" + players +
+                ", tournaments=" + tournaments +
+                '}';
+    }
 }

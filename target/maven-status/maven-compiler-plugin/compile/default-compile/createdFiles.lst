@@ -23,6 +23,7 @@ org\spring\services\serviceImpl\TeamServiceImpl.class
 org\spring\utils\DateUti.class
 org\spring\utils\InputValidator.class
 org\spring\models\Player.class
+org\spring\utils\EntityManagerSingleton.class
 org\spring\repositories\repositoryImpl\TournamentRepositoryImpl.class
 org\spring\repositories\TeamRepository.class
 org\spring\services\serviceImpl\TournamentServiceImpl.class

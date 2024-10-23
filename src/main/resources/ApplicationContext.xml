@@ -23,7 +23,7 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver" />
-        <property name="url" value="jdbc:h2:file:./data/tournament_db;AUTO_SERVER=TRUE" />
+        <property name="url" value="jdbc:h2:file:./tournament_db;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1" />
         <property name="username" value="sa" />
         <property name="password" value="" />
     </bean>
@@ -32,11 +32,8 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 
-    <bean id="entityManager" factory-bean="entityManagerFactory" factory-method="createEntityManager" />
 
-    <bean id="teamRepository" class="org.spring.repositories.repositoryImpl.TeamRepositoryImpl">
-        <constructor-arg ref="entityManager" />
-    </bean>
+    <bean id="teamRepository" class="org.spring.repositories.repositoryImpl.TeamRepositoryImpl"/>
 
     <!-- Beans for services -->
     <bean id="teamService" class="org.spring.services.serviceImpl.TeamServiceImpl">
@@ -47,9 +44,7 @@
         <constructor-arg ref="teamService"/>
     </bean>
 
-    <bean id="playerRepository" class="org.spring.repositories.repositoryImpl.PlayerRepositoryImpl">
-        <constructor-arg ref="entityManager" />
-    </bean>
+    <bean id="playerRepository" class="org.spring.repositories.repositoryImpl.PlayerRepositoryImpl"/>
 
     <bean id="playerService" class="org.spring.services.serviceImpl.PlayerServiceImpl">
         <constructor-arg ref="playerRepository" />
