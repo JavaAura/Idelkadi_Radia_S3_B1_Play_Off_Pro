@@ -1,6 +1,8 @@
 package org.spring.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,9 +13,11 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Team name cannot be blank")
     @Column(nullable = false)
     private String name;
 
+    @Min(value = 1, message = "Ranking must be a positive number or zero")
     @Column(nullable = true)
     private int ranking;
 

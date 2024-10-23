@@ -1,6 +1,8 @@
 package org.spring.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "player")
@@ -9,9 +11,11 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Player pseudo cannot be blank")
     @Column(nullable = false)
     private String pseudo;
 
+    @Min(value = 16, message = "Age must be at least 16")
     @Column(nullable = false)
     private int age;
 
@@ -59,5 +63,15 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", pseudo='" + pseudo + '\'' +
+                ", age=" + age +
+                ", team=" + team +
+                '}';
     }
 }
