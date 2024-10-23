@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <tx:annotation-driven />
+    <context:annotation-config/>
+
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="tournament" />
@@ -25,7 +33,7 @@
     </bean>
 
     <bean id="entityManager" factory-bean="entityManagerFactory" factory-method="createEntityManager" />
-    <!-- Beans for repositories -->
+
     <bean id="teamRepository" class="org.spring.repositories.repositoryImpl.TeamRepositoryImpl">
         <constructor-arg ref="entityManager" />
     </bean>
@@ -37,5 +45,17 @@
 
     <bean id="teamMenu" class="org.spring.ConsoleUI.TeamMenu">
         <constructor-arg ref="teamService"/>
+    </bean>
+
+    <bean id="playerRepository" class="org.spring.repositories.repositoryImpl.PlayerRepositoryImpl">
+        <constructor-arg ref="entityManager" />
+    </bean>
+
+    <bean id="playerService" class="org.spring.services.serviceImpl.PlayerServiceImpl">
+        <constructor-arg ref="playerRepository" />
+    </bean>
+
+    <bean id="playerMenu" class="org.spring.ConsoleUI.PlayerMenu">
+        <constructor-arg ref="playerService"/>
     </bean>
 </beans>

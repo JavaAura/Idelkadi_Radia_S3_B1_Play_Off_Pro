@@ -16,7 +16,7 @@ public class Player {
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "team_id", nullable = false)
+    @JoinColumn(name = "team_id", nullable = true )
     private Team team;
 
     public Player() {

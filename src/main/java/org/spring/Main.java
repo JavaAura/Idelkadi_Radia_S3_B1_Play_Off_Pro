@@ -1,5 +1,6 @@
 package org.spring;
 
+import org.spring.ConsoleUI.PlayerMenu;
 import org.spring.ConsoleUI.TeamMenu;
 import org.spring.utils.ScannerUtil;
 import org.springframework.context.ApplicationContext;
@@ -15,6 +16,8 @@ public class Main {
     public static Scanner scanner;
     public static void showMainMenu() {
         scanner = ScannerUtil.getInstance();
+        ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+
         while (true) {
             System.out.println("=== Main Menu ===");
             System.out.println("1. Manage Teams");
@@ -28,11 +31,12 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
                     TeamMenu teamMenu = (TeamMenu) context.getBean("teamMenu");
                     TeamMenu.showTeamMenu(scanner);
                     break;
                 case 2:
+                    PlayerMenu playerMenu = (PlayerMenu) context.getBean("playerMenu");
+                    PlayerMenu.showPlayerMenu(scanner);
                     break;
                 case 3:
                     break;
