@@ -3,6 +3,7 @@ package org.spring.models;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -69,6 +70,14 @@ public class Team {
         this.players = players;
     }
 
+    public Set<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(Set<Tournament> tournaments) {
+        this.tournaments = tournaments;
+    }
+
     @Override
     public String toString() {
         return "Team{" +
@@ -77,4 +86,5 @@ public class Team {
                 ", ranking=" + ranking +
                 '}';
     }
+
 }

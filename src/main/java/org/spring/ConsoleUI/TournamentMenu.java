@@ -3,10 +3,15 @@ package org.spring.ConsoleUI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.models.Game;
+import org.spring.models.Team;
 import org.spring.models.Tournament;
 import org.spring.models.enums.GameDifficulty;
+import org.spring.services.PlayerService;
+import org.spring.services.TeamService;
 import org.spring.services.TournamentService;
 import org.spring.utils.InputValidator;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,6 +21,8 @@ public class TournamentMenu {
     private static final Logger logger = LoggerFactory.getLogger(TournamentMenu.class);
     private static Scanner scanner;
     private static TournamentService tournamentService;
+    private static ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+
 
     public TournamentMenu(TournamentService tournamentService) {
         this.tournamentService = tournamentService;
@@ -31,7 +38,9 @@ public class TournamentMenu {
             logger.info("3. Read All Tournaments");
             logger.info("4. Update Tournament");
             logger.info("5. Delete Tournament");
-            logger.info("6. Exit");
+            logger.info("6. Add Teams to Tournament");
+            logger.info("7. Remove Teams from Tournament");
+            logger.info("8. Exit");
             logger.info("Choose an option: ");
 
             int choice = InputValidator.validatePositiveInteger();
@@ -53,6 +62,12 @@ public class TournamentMenu {
                     deleteTournament();
                     break;
                 case 6:
+                    addTeamsToTournament();
+                    break;
+                case 7:
+                    removeTeamsFromTournament();
+                    break;
+                case 8:
                     running = false;
                     break;
                 default:
@@ -149,5 +164,77 @@ public class TournamentMenu {
         } else {
             logger.error("Failed to delete tournament.");
         }
+    }
+
+    private static void addTeamsToTournament() {
+                TeamService teamService = (TeamService) context.getBean("teamService");
+
+
+        logger.info("Enter Tournament ID to add teams: ");
+        Long tournamentId = scanner.nextLong();
+        scanner.nextLine();
+
+        Tournament tournament = tournamentService.readTournament(tournamentId); // Méthode à implémenter dans votre service
+        if (tournament == null) {
+            logger.warn("Tournament not found.");
+            return;
+        }
+
+        while (true) {
+            logger.info("Enter Team ID to add to the tournament (or 0 to stop): ");
+            Long teamId = scanner.nextLong();
+            scanner.nextLine();
+
+            if (teamId == 0) {
+                break;
+            }
+
+            Team team = teamService.getTeamById(teamId);
+            if (team != null) {
+                tournament.addTeam(team);
+                tournamentService.updateTournament(tournament); // Mettez à jour le tournoi
+                logger.info("Team {} added to tournament {}.", team.getName(), tournament.getTitle());
+            } else {
+                logger.warn("Team with ID {} not found.", teamId);
+            }
+        }
+
+        logger.info("All specified teams have been added to the tournament.");
+    }
+
+    private static void removeTeamsFromTournament() {
+        TeamService teamService = (TeamService) context.getBean("teamService");
+
+
+        logger.info("Enter Tournament ID to remove teams from: ");
+        Long tournamentId = scanner.nextLong();
+        scanner.nextLine();
+
+        Tournament tournament = tournamentService.readTournament(tournamentId); // Méthode à implémenter dans votre service
+        if (tournament == null) {
+            logger.warn("Tournament not found.");
+            return;
+        }
+
+        while (true) {
+            logger.info("Enter Team ID to remove from the tournament (or 0 to stop): ");
+            Long teamId = scanner.nextLong();
+            scanner.nextLine();
+
+            if (teamId == 0) {
+                break;
+            }
+
+            Team team = teamService.getTeamById(teamId);
+            if (team != null) {
+                tournament.removeTeam(team);
+                tournamentService.updateTournament(tournament);
+                logger.info("Team {} removed from tournament {}.", team.getName(), tournament.getTitle());
+            } else {
+                logger.warn("Team with ID {} not found.", teamId);
+            }
+        }
+
+        logger.info("All specified teams have been removed from the tournament.");
     }
 }

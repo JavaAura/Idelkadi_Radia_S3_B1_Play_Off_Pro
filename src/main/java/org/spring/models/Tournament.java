@@ -50,6 +50,31 @@ public class Tournament {
     )
     private Set<Team> teams = new HashSet<>();
 
+    public void addTeam(Team team) {
+        if (team != null) {
+            teams.add(team);
+            team.getTournaments().add(this); // Assurer la bidirectionnalité
+        } else {
+            throw new IllegalArgumentException("Team cannot be null");
+        }
+    }
+
+    public void removeTeam(Team team) {
+        if (team != null) {
+            teams.remove(team);
+            team.getTournaments().remove(this); // Assurer la bidirectionnalité
+        } else {
+            throw new IllegalArgumentException("Team cannot be null");
+        }
+    }
+
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
 
     public Tournament() {
     }
@@ -163,4 +188,6 @@ public class Tournament {
     public void setGame(Game game) {
         this.game = game;
     }
+
+
 }
