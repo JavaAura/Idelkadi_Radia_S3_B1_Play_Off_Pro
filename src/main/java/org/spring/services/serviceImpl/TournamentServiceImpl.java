@@ -1,7 +1,7 @@
 package org.spring.services.serviceImpl;
 
 import org.spring.dao.TournamentDao;
-import org.spring.dao.daoImpl.TournamentDaoImpl;
+import org.spring.dao.daoImpl.TournamentDaoExtension;
 import org.spring.models.Tournament;
 import org.spring.repositories.TournamentRepository;
 import org.spring.services.TournamentService;
@@ -42,7 +42,8 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     public Double getEstimatedDuration(Long tournamentId) {
-        TournamentDao tournamentDao = new TournamentDaoImpl();
+//        TournamentDao tournamentDao = new TournamentDaoImpl();
+        TournamentDao tournamentDao = new TournamentDaoExtension();
         return tournamentDao.calculateEstimatedDuration(tournamentId);
     }
 }
