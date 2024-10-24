@@ -1,0 +1,6 @@
+#FileLock
+#Thu Oct 24 16:23:19 WEST 2024
+hostName=192.168.80.244
+id=192bf200265ef05854176dd6eebf42cdee58d6414bc
+method=file
+server=192.168.80.244\:50310

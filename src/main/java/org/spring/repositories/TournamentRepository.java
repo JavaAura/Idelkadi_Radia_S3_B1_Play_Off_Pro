@@ -5,7 +5,7 @@ import org.spring.models.Tournament;
 import java.util.List;
 
 public interface TournamentRepository {
-    boolean createTournament(Tournament tournament);
+    Long createTournament(Tournament tournament);
 
     Tournament readTournament(Long id);
 

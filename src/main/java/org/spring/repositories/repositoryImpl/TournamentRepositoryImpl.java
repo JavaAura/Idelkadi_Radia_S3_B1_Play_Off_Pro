@@ -17,7 +17,7 @@ public class TournamentRepositoryImpl implements TournamentRepository {
     }
 
     @Override
-    public boolean createTournament(Tournament tournament) {
+    public Long createTournament(Tournament tournament) {
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
@@ -26,14 +26,14 @@ public class TournamentRepositoryImpl implements TournamentRepository {
             entityManager.persist(tournament);
             entityManager.flush();
             transaction.commit();
-            return true;
+            return tournament.getId();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
             System.out.println(e.getMessage());
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

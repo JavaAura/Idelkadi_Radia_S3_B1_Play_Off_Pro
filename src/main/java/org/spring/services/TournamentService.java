@@ -6,7 +6,7 @@ import java.util.List;
 
  public interface TournamentService {
 
-     boolean createTournament(Tournament tournament);
+     Long createTournament(Tournament tournament);
 
      Tournament readTournament(Long id);
 
@@ -15,6 +15,8 @@ import java.util.List;
      boolean updateTournament(Tournament tournament);
 
      boolean deleteTournament(Long id);
+
+     Double getEstimatedDuration(Long tournamentId);
 }
 
     

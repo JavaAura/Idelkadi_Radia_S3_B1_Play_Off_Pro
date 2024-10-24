@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 public class EntityManagerSingleton {
 
     private static EntityManagerSingleton instance;
-    private final EntityManager entityManager;
+    private static  EntityManager entityManager;
 
     private EntityManagerSingleton() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("tournament");
@@ -25,7 +25,7 @@ public class EntityManagerSingleton {
         return instance;
     }
 
-    public EntityManager getEntityManager() {
+    public static EntityManager getEntityManager() {
         return entityManager;
     }
 

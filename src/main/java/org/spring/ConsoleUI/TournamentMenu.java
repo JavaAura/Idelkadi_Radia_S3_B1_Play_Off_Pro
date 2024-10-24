@@ -40,7 +40,7 @@ public class TournamentMenu {
             logger.info("5. Delete Tournament");
             logger.info("6. Add Teams to Tournament");
             logger.info("7. Remove Teams from Tournament");
-            logger.info("8. Exit");
+            logger.info("9. Exit");
             logger.info("Choose an option: ");
 
             int choice = InputValidator.validatePositiveInteger();
@@ -91,8 +91,6 @@ public class TournamentMenu {
         tournament.setCeremonyTime(InputValidator.validatePositiveDouble());
         logger.info("Enter break time between matches: ");
         tournament.setBreakTimeBetweenMatches(InputValidator.validatePositiveDouble());
-        logger.info("Enter estimated duration: ");
-        tournament.setEstimatedDuration(InputValidator.validatePositiveDouble());
 
         scanner.nextLine();
 
@@ -106,8 +104,16 @@ public class TournamentMenu {
         game.setDifficulty(GameDifficulty.EASY);
         tournament.setGame(game);
 
-        if (tournamentService.createTournament(tournament)) {
-            logger.info("Tournament created successfully!");
+        Long tournamentId = tournamentService.createTournament(tournament);
+
+        if (tournamentId != null) {
+            tournament.setId(tournamentId);
+            double estimatedDuration = tournamentService.getEstimatedDuration(tournament.getId());
+            tournament.setEstimatedDuration(estimatedDuration);
+
+            tournamentService.updateTournament(tournament);
+
+            logger.info("Tournament created successfully! Estimated duration: {}", estimatedDuration);
         } else {
             logger.error("Failed to create tournament.");
         }
@@ -146,6 +152,10 @@ public class TournamentMenu {
                 tournament.setTitle(title);
             }
 
+            double estimatedDuration = tournamentService.getEstimatedDuration(tournament.getId());
+            tournament.setEstimatedDuration(estimatedDuration);
+
+
             if (tournamentService.updateTournament(tournament)) {
                 logger.info("Tournament updated successfully!");
             } else {
@@ -167,8 +177,7 @@ public class TournamentMenu {
     }
 
     private static void addTeamsToTournament() {
-                TeamService teamService = (TeamService) context.getBean("teamService");
-
+        TeamService teamService = (TeamService) context.getBean("teamService");
 
         logger.info("Enter Tournament ID to add teams: ");
         Long tournamentId = scanner.nextLong();
@@ -192,12 +201,14 @@ public class TournamentMenu {
             Team team = teamService.getTeamById(teamId);
             if (team != null) {
                 tournament.addTeam(team);
-                tournamentService.updateTournament(tournament); // Mettez à jour le tournoi
+                tournamentService.updateTournament(tournament);
                 logger.info("Team {} added to tournament {}.", team.getName(), tournament.getTitle());
             } else {
                 logger.warn("Team with ID {} not found.", teamId);
             }
         }
+        double estimatedDuration = tournamentService.getEstimatedDuration(tournament.getId());
+        tournament.setEstimatedDuration(estimatedDuration);
 
         logger.info("All specified teams have been added to the tournament.");
     }
@@ -210,7 +221,7 @@ public class TournamentMenu {
         Long tournamentId = scanner.nextLong();
         scanner.nextLine();
 
-        Tournament tournament = tournamentService.readTournament(tournamentId); // Méthode à implémenter dans votre service
+        Tournament tournament = tournamentService.readTournament(tournamentId);
         if (tournament == null) {
             logger.warn("Tournament not found.");
             return;
@@ -234,7 +245,8 @@ public class TournamentMenu {
                 logger.warn("Team with ID {} not found.", teamId);
             }
         }
-
+        double estimatedDuration = tournamentService.getEstimatedDuration(tournament.getId());
+        tournament.setEstimatedDuration(estimatedDuration);
         logger.info("All specified teams have been removed from the tournament.");
     }
 }

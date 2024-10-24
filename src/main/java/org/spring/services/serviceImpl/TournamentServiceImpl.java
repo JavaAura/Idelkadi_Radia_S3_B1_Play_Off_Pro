@@ -1,5 +1,7 @@
 package org.spring.services.serviceImpl;
 
+import org.spring.dao.TournamentDao;
+import org.spring.dao.daoImpl.TournamentDaoImpl;
 import org.spring.models.Tournament;
 import org.spring.repositories.TournamentRepository;
 import org.spring.services.TournamentService;
@@ -14,7 +16,7 @@ public class TournamentServiceImpl implements TournamentService {
         this.tournamentRepository = tournamentRepository;
     }
     @Override
-    public boolean createTournament(Tournament tournament) {
+    public Long createTournament(Tournament tournament) {
         return tournamentRepository.createTournament(tournament);
     }
 
@@ -36,5 +38,11 @@ public class TournamentServiceImpl implements TournamentService {
     @Override
     public boolean deleteTournament(Long id) {
         return tournamentRepository.deleteTournament(id);
+    }
+
+    @Override
+    public Double getEstimatedDuration(Long tournamentId) {
+        TournamentDao tournamentDao = new TournamentDaoImpl();
+        return tournamentDao.calculateEstimatedDuration(tournamentId);
     }
 }
