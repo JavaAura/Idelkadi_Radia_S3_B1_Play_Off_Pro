@@ -2,6 +2,7 @@ package org.spring;
 
 import org.spring.ConsoleUI.PlayerMenu;
 import org.spring.ConsoleUI.TeamMenu;
+import org.spring.ConsoleUI.TournamentMenu;
 import org.spring.utils.ScannerUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -39,6 +40,8 @@ public class Main {
                     PlayerMenu.showPlayerMenu(scanner);
                     break;
                 case 3:
+                    TournamentMenu tournamentMenu = (TournamentMenu) context.getBean("tournamentMenu");
+                    TournamentMenu.showTournamentMenu(scanner);
                     break;
                 case 4:
                     System.out.println("Exiting...");

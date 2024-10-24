@@ -1,4 +1,17 @@
 package org.spring.repositories;
 
-public class TournamentRepository {
+import org.spring.models.Tournament;
+
+import java.util.List;
+
+public interface TournamentRepository {
+    boolean createTournament(Tournament tournament);
+
+    Tournament readTournament(Long id);
+
+    List<Tournament> readAllTournaments();
+
+    boolean updateTournament(Tournament tournament);
+
+    boolean deleteTournament(Long id);
 }

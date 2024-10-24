@@ -38,11 +38,11 @@ public class Tournament {
     @Enumerated(EnumType.STRING)
     private TournamentStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "game_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "game_id", nullable= false)
     private Game game;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinTable(
             name = "tournament_team",
             joinColumns = @JoinColumn(name = "tournament_id"),

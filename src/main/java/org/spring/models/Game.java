@@ -13,22 +13,23 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column( name = "name" , nullable = false)
-    private String name ;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column( name = "avgMatchDuration" , nullable = false)
+    @Column(name = "avgMatchDuration", nullable = false)
     private double avgMatchDuration;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "difficulty", nullable = false)
     private GameDifficulty difficulty;
 
-    @OneToMany(mappedBy = "game" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<Tournament> tournaments;
 
     public Game() {
 
     }
+
     public Game(Long id, String name, double avgMatchDuration, GameDifficulty difficulty, List<Tournament> tounaments) {
         this.id = id;
         this.name = name;
@@ -36,7 +37,6 @@ public class Game {
         this.difficulty = difficulty;
         this.tournaments = tounaments;
     }
-
 
 
     public Long getId() {
