@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.models.Team;
 import org.spring.services.TeamService;
+import org.spring.utils.InputValidator;
 
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +30,7 @@ public class TeamMenu {
             logger.info("6. Back to Main Menu");
             logger.info("Please select an option (1-6): ");
 
-            int choice = scanner.nextInt();
+            int choice = InputValidator.validatePositiveInteger();
             scanner.nextLine();
 
             switch (choice) {
@@ -61,7 +62,8 @@ public class TeamMenu {
         String name = scanner.nextLine();
 
         logger.info("Enter Team Ranking: ");
-        int ranking = scanner.nextInt();
+        int ranking = InputValidator.validatePositiveInteger();
+
         scanner.nextLine();
 
         Team team = new Team();
@@ -91,7 +93,7 @@ public class TeamMenu {
         String name = scanner.nextLine();
 
         logger.info("Enter new Team Ranking (current: {}): ", existingTeam.getRanking());
-        int ranking = scanner.nextInt();
+        int ranking = InputValidator.validatePositiveInteger();
         scanner.nextLine();
 
         existingTeam.setName(name);

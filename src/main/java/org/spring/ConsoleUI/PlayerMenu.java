@@ -4,6 +4,7 @@ import org.spring.models.Player;
 import org.spring.services.PlayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spring.utils.InputValidator;
 
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +30,7 @@ public class PlayerMenu {
             logger.info("6. Back to Main Menu");
             logger.info("Please select an option (1-6): ");
 
-            int choice = scanner.nextInt();
+            int choice = InputValidator.validatePositiveInteger();
             scanner.nextLine();
 
             switch (choice) {
@@ -61,7 +62,7 @@ public class PlayerMenu {
         String pseudo = scanner.nextLine();
 
         logger.info("Enter Player Age: ");
-        int age = scanner.nextInt();
+        int age = InputValidator.validateAge();
         scanner.nextLine(); 
 
         Player player = new Player();

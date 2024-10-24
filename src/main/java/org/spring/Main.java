@@ -6,6 +6,7 @@ import org.spring.ConsoleUI.GameMenu;
 import org.spring.ConsoleUI.PlayerMenu;
 import org.spring.ConsoleUI.TeamMenu;
 import org.spring.ConsoleUI.TournamentMenu;
+import org.spring.utils.InputValidator;
 import org.spring.utils.ScannerUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -29,7 +30,7 @@ public class Main {
             logger.info("5. Exit");
             logger.info("Please select an option (1-4): ");
 
-            int choice = scanner.nextInt();
+            int choice = InputValidator.validatePositiveInteger();
             scanner.nextLine();
 
             switch (choice) {

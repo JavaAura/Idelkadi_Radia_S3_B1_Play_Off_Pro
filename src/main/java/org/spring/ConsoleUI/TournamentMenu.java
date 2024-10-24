@@ -6,6 +6,7 @@ import org.spring.models.Game;
 import org.spring.models.Tournament;
 import org.spring.models.enums.GameDifficulty;
 import org.spring.services.TournamentService;
+import org.spring.utils.InputValidator;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,7 +34,7 @@ public class TournamentMenu {
             logger.info("6. Exit");
             logger.info("Choose an option: ");
 
-            int choice = scanner.nextInt();
+            int choice = InputValidator.validatePositiveInteger();
             scanner.nextLine();
             switch (choice) {
                 case 1:
@@ -72,11 +73,11 @@ public class TournamentMenu {
         logger.info("Enter end date (YYYY-MM-DD): ");
         tournament.setEndDate(LocalDate.parse(scanner.nextLine()));
         logger.info("Enter ceremony time: ");
-        tournament.setCeremonyTime(scanner.nextDouble());
+        tournament.setCeremonyTime(InputValidator.validatePositiveDouble());
         logger.info("Enter break time between matches: ");
-        tournament.setBreakTimeBetweenMatches(scanner.nextDouble());
+        tournament.setBreakTimeBetweenMatches(InputValidator.validatePositiveDouble());
         logger.info("Enter estimated duration: ");
-        tournament.setEstimatedDuration(scanner.nextDouble());
+        tournament.setEstimatedDuration(InputValidator.validatePositiveDouble());
 
         scanner.nextLine();
 

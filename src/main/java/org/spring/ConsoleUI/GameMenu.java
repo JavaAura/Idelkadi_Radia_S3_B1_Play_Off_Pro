@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.spring.models.Game;
 import org.spring.services.GameService;
 import org.spring.models.enums.GameDifficulty;
+import org.spring.utils.InputValidator;
 
 import java.util.List;
 import java.util.Scanner;
@@ -30,7 +31,7 @@ public class GameMenu {
             logger.info("6. Back to Main Menu");
             logger.info("Please select an option (1-6): ");
 
-            int choice = scanner.nextInt();
+            int choice = InputValidator.validatePositiveInteger();
             scanner.nextLine();
 
             switch (choice) {
@@ -62,11 +63,11 @@ public class GameMenu {
         String name = scanner.nextLine();
 
         logger.info("Enter Average Match Duration: ");
-        double avgMatchDuration = scanner.nextDouble();
+        double avgMatchDuration = InputValidator.validatePositiveDouble();
         scanner.nextLine();
 
         logger.info("Select Game Difficulty (EASY, MEDIUM, HARD, EXPERT): ");
-        GameDifficulty difficulty = GameDifficulty.valueOf(scanner.nextLine().toUpperCase());
+        GameDifficulty difficulty = InputValidator.validateEnum(GameDifficulty.class);
 
         Game game = new Game();
         game.setName(name);
@@ -96,11 +97,11 @@ public class GameMenu {
         String name = scanner.nextLine();
 
         logger.info("Enter new Average Match Duration (current: {}): ", existingGame.getAvgMatchDuration());
-        double avgMatchDuration = scanner.nextDouble();
+        double avgMatchDuration = InputValidator.validatePositiveDouble();
         scanner.nextLine();
 
         logger.info("Select new Game Difficulty (current: {}): ", existingGame.getDifficulty());
-        GameDifficulty difficulty = GameDifficulty.valueOf(scanner.nextLine().toUpperCase());
+        GameDifficulty difficulty = InputValidator.validateEnum(GameDifficulty.class);
 
         existingGame.setName(name);
         existingGame.setAvgMatchDuration(avgMatchDuration);
