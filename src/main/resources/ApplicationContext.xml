@@ -63,4 +63,14 @@
     <bean id="tournamentMenu" class="org.spring.ConsoleUI.TournamentMenu">
         <constructor-arg ref="tournamentService"/>
     </bean>
+
+    <bean id="gameRepository" class="org.spring.repositories.repositoryImpl.GameRepositoryImpl"/>
+
+    <bean id="gameService" class="org.spring.services.serviceImpl.GameServiceImpl">
+        <constructor-arg ref="gameRepository"/>
+    </bean>
+
+    <bean id="gameMenu" class="org.spring.ConsoleUI.GameMenu" >
+        <constructor-arg ref="gameService"/>
+    </bean>
 </beans>

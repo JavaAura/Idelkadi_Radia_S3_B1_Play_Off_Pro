@@ -85,8 +85,9 @@ public class Game {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", avgMatchDuration=" + avgMatchDuration +
-                ", difficulty=" + difficulty +
-                ", tounaments=" + tournaments +
+                ", difficulty=" + difficulty.name() +
+                ", tournamentsCount=" + (tournaments != null ? tournaments.size() : 0) +
                 '}';
     }
+
 }

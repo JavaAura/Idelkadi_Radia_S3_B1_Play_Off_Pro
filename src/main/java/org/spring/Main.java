@@ -1,5 +1,6 @@
 package org.spring;
 
+import org.spring.ConsoleUI.GameMenu;
 import org.spring.ConsoleUI.PlayerMenu;
 import org.spring.ConsoleUI.TeamMenu;
 import org.spring.ConsoleUI.TournamentMenu;
@@ -15,6 +16,7 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner;
+
     public static void showMainMenu() {
         scanner = ScannerUtil.getInstance();
         ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
@@ -23,8 +25,9 @@ public class Main {
             System.out.println("=== Main Menu ===");
             System.out.println("1. Manage Teams");
             System.out.println("2. Manage Players");
-            System.out.println("3. Manage Tournaments");
-            System.out.println("4. Exit");
+            System.out.println("3. Manage Games");
+            System.out.println("4. Manage Tournaments");
+            System.out.println("5. Exit");
             System.out.print("Please select an option (1-4): ");
 
             int choice = scanner.nextInt();
@@ -40,10 +43,14 @@ public class Main {
                     PlayerMenu.showPlayerMenu(scanner);
                     break;
                 case 3:
+                    GameMenu gameMenu = (GameMenu) context.getBean("gameMenu");
+                    GameMenu.showGameMenu(scanner);
+                    break;
+                case 4:
                     TournamentMenu tournamentMenu = (TournamentMenu) context.getBean("tournamentMenu");
                     TournamentMenu.showTournamentMenu(scanner);
                     break;
-                case 4:
+                case 5:
                     System.out.println("Exiting...");
                     return;
                 default:
