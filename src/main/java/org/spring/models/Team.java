@@ -75,8 +75,6 @@ public class Team {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", ranking=" + ranking +
-                ", players=" + players +
-                ", tournaments=" + tournaments +
                 '}';
     }
 }
