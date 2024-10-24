@@ -3,6 +3,7 @@ package org.spring.services.serviceImpl;
 import org.spring.models.Game;
 import org.spring.repositories.GameRepository;
 import org.spring.services.GameService;
+
 import java.util.List;
 
 public class GameServiceImpl implements GameService {
@@ -18,20 +19,19 @@ public class GameServiceImpl implements GameService {
             gameRepository.save(game);
             return true;
         } catch (Exception e) {
-            System.out.println("Error adding game: " + e.getMessage());
+
             return false;
         }
     }
 
     @Override
     public boolean updateGame(Game game) {
-        if (gameRepository.findById(game.getId())!= null) {
+        if (gameRepository.findById(game.getId()) != null) {
             gameRepository.save(game);
             return true;
-        } else {
-            System.out.println("Game not found with ID: " + game.getId());
-            return false;
         }
+        return false;
+
     }
 
     @Override
@@ -39,10 +39,9 @@ public class GameServiceImpl implements GameService {
         if (gameRepository.findById(id) != null) {
             gameRepository.delete(id);
             return true;
-        } else {
-            System.out.println("Game not found with ID: " + id);
-            return false;
         }
+        return false;
+
     }
 
     @Override

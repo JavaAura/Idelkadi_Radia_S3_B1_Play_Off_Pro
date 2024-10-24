@@ -1,5 +1,7 @@
 package org.spring;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spring.ConsoleUI.GameMenu;
 import org.spring.ConsoleUI.PlayerMenu;
 import org.spring.ConsoleUI.TeamMenu;
@@ -7,28 +9,25 @@ import org.spring.ConsoleUI.TournamentMenu;
 import org.spring.utils.ScannerUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.orm.jpa.EntityManagerFactoryInfo;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner;
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void showMainMenu() {
         scanner = ScannerUtil.getInstance();
         ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 
         while (true) {
-            System.out.println("=== Main Menu ===");
-            System.out.println("1. Manage Teams");
-            System.out.println("2. Manage Players");
-            System.out.println("3. Manage Games");
-            System.out.println("4. Manage Tournaments");
-            System.out.println("5. Exit");
-            System.out.print("Please select an option (1-4): ");
+            logger.info("=== Main Menu ===");
+            logger.info("1. Manage Teams");
+            logger.info("2. Manage Players");
+            logger.info("3. Manage Games");
+            logger.info("4. Manage Tournaments");
+            logger.info("5. Exit");
+            logger.info("Please select an option (1-4): ");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -51,25 +50,17 @@ public class Main {
                     TournamentMenu.showTournamentMenu(scanner);
                     break;
                 case 5:
-                    System.out.println("Exiting...");
+                    logger.info("Exiting...");
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    logger.warn("Invalid choice. Please try again.");
             }
         }
     }
 
     public static void main(String[] args) {
+        logger.info("Starting application...");
         showMainMenu();
         scanner.close();
     }
-
-//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("tournament");
-//    EntityManager em = emf.createEntityManager();
-//
-//        em.getTransaction().begin();
-//        em.getTransaction().commit();
-//
-//        em.close();
-//        emf.close();
 }

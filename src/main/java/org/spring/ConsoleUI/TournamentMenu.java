@@ -1,5 +1,7 @@
 package org.spring.ConsoleUI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spring.models.Game;
 import org.spring.models.Tournament;
 import org.spring.models.enums.GameDifficulty;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TournamentMenu {
-
+    private static final Logger logger = LoggerFactory.getLogger(TournamentMenu.class);
     private static Scanner scanner;
     private static TournamentService tournamentService;
 
@@ -22,14 +24,14 @@ public class TournamentMenu {
         scanner = scan;
         boolean running = true;
         while (running) {
-            System.out.println("===== Tournament Management Menu =====");
-            System.out.println("1. Create Tournament");
-            System.out.println("2. Read Tournament");
-            System.out.println("3. Read All Tournaments");
-            System.out.println("4. Update Tournament");
-            System.out.println("5. Delete Tournament");
-            System.out.println("6. Exit");
-            System.out.print("Choose an option: ");
+            logger.info("===== Tournament Management Menu =====");
+            logger.info("1. Create Tournament");
+            logger.info("2. Read Tournament");
+            logger.info("3. Read All Tournaments");
+            logger.info("4. Update Tournament");
+            logger.info("5. Delete Tournament");
+            logger.info("6. Exit");
+            logger.info("Choose an option: ");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -53,58 +55,56 @@ public class TournamentMenu {
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    logger.warn("Invalid option. Please try again.");
             }
         }
     }
 
     private static void createTournament() {
         Tournament tournament = new Tournament();
-        System.out.print("Enter tournament title: ");
+        logger.info("Enter tournament title: ");
         tournament.setTitle(scanner.nextLine());
-        System.out.print("Enter number of spectators: ");
+        logger.info("Enter number of spectators: ");
         tournament.setNumSpectators(scanner.nextInt());
         scanner.nextLine();
-        System.out.print("Enter start date (YYYY-MM-DD): ");
+        logger.info("Enter start date (YYYY-MM-DD): ");
         tournament.setStartDate(LocalDate.parse(scanner.nextLine()));
-        System.out.print("Enter end date (YYYY-MM-DD): ");
+        logger.info("Enter end date (YYYY-MM-DD): ");
         tournament.setEndDate(LocalDate.parse(scanner.nextLine()));
-        System.out.print("Enter ceremony time: ");
+        logger.info("Enter ceremony time: ");
         tournament.setCeremonyTime(scanner.nextDouble());
-        System.out.print("Enter break time between matches: ");
+        logger.info("Enter break time between matches: ");
         tournament.setBreakTimeBetweenMatches(scanner.nextDouble());
-        System.out.print("Enter estimated duration: ");
+        logger.info("Enter estimated duration: ");
         tournament.setEstimatedDuration(scanner.nextDouble());
 
         scanner.nextLine();
 
-        System.out.println("===== Game Details =====");
-        System.out.print("Enter game name: ");
+        logger.info("===== Game Details =====");
+        logger.info("Enter game name: ");
         String gameName = scanner.nextLine();
 
         Game game = new Game();
         game.setName(gameName);
         game.setAvgMatchDuration(20);
         game.setDifficulty(GameDifficulty.EASY);
-
-
         tournament.setGame(game);
 
         if (tournamentService.createTournament(tournament)) {
-            System.out.println("Tournament created successfully!");
+            logger.info("Tournament created successfully!");
         } else {
-            System.out.println("Failed to create tournament.");
+            logger.error("Failed to create tournament.");
         }
     }
 
     private static void readTournament() {
-        System.out.print("Enter tournament ID: ");
+        logger.info("Enter tournament ID: ");
         Long id = scanner.nextLong();
         Tournament tournament = tournamentService.readTournament(id);
         if (tournament != null) {
-            System.out.println(tournament);
+            logger.info("Tournament details: {}", tournament);
         } else {
-            System.out.println("Tournament not found.");
+            logger.warn("Tournament not found.");
         }
     }
 
@@ -112,41 +112,41 @@ public class TournamentMenu {
         List<Tournament> tournaments = tournamentService.readAllTournaments();
         if (tournaments != null && !tournaments.isEmpty()) {
             for (Tournament tournament : tournaments) {
-                System.out.println(tournament);
+                logger.info("Tournament: {}", tournament);
             }
         } else {
-            System.out.println("No tournaments found.");
+            logger.info("No tournaments found.");
         }
     }
 
     private static void updateTournament() {
-        System.out.print("Enter tournament ID to update: ");
+        logger.info("Enter tournament ID to update: ");
         Long id = scanner.nextLong();
         Tournament tournament = tournamentService.readTournament(id);
         if (tournament != null) {
-            System.out.print("Enter new title (leave blank to keep current): ");
+            logger.info("Enter new title (leave blank to keep current): ");
             String title = scanner.nextLine();
             if (!title.isEmpty()) {
                 tournament.setTitle(title);
             }
 
             if (tournamentService.updateTournament(tournament)) {
-                System.out.println("Tournament updated successfully!");
+                logger.info("Tournament updated successfully!");
             } else {
-                System.out.println("Failed to update tournament.");
+                logger.error("Failed to update tournament.");
             }
         } else {
-            System.out.println("Tournament not found.");
+            logger.warn("Tournament not found.");
         }
     }
 
     private static void deleteTournament() {
-        System.out.print("Enter tournament ID to delete: ");
+        logger.info("Enter tournament ID to delete: ");
         Long id = scanner.nextLong();
         if (tournamentService.deleteTournament(id)) {
-            System.out.println("Tournament deleted successfully!");
+            logger.info("Tournament deleted successfully!");
         } else {
-            System.out.println("Failed to delete tournament.");
+            logger.error("Failed to delete tournament.");
         }
     }
 }

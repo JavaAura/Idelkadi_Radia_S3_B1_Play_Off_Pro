@@ -2,10 +2,14 @@ package org.spring.ConsoleUI;
 
 import org.spring.models.Player;
 import org.spring.services.PlayerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Scanner;
+
 public class PlayerMenu {
+    private static final Logger logger = LoggerFactory.getLogger(PlayerMenu.class);
     public static Scanner scanner;
     public static PlayerService playerService;
 
@@ -16,14 +20,14 @@ public class PlayerMenu {
     public static void showPlayerMenu(Scanner scan) {
         scanner = scan;
         while (true) {
-            System.out.println("=== Player Management Menu ===");
-            System.out.println("1. Add New Player");
-            System.out.println("2. Update Player");
-            System.out.println("3. Delete Player");
-            System.out.println("4. Display All Players");
-            System.out.println("5. Search Player");
-            System.out.println("6. Back to Main Menu");
-            System.out.print("Please select an option (1-6): ");
+            logger.info("=== Player Management Menu ===");
+            logger.info("1. Add New Player");
+            logger.info("2. Update Player");
+            logger.info("3. Delete Player");
+            logger.info("4. Display All Players");
+            logger.info("5. Search Player");
+            logger.info("6. Back to Main Menu");
+            logger.info("Please select an option (1-6): ");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -47,18 +51,18 @@ public class PlayerMenu {
                 case 6:
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    logger.warn("Invalid choice. Please try again.");
             }
         }
     }
 
     private static void addNewPlayer() {
-        System.out.println("Enter Player Pseudo: ");
+        logger.info("Enter Player Pseudo: ");
         String pseudo = scanner.nextLine();
 
-        System.out.println("Enter Player Age: ");
+        logger.info("Enter Player Age: ");
         int age = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine(); 
 
         Player player = new Player();
         player.setPseudo(pseudo);
@@ -66,74 +70,74 @@ public class PlayerMenu {
 
         boolean isAdded = playerService.addPlayer(player);
         if (isAdded) {
-            System.out.println("Player successfully added.");
+            logger.info("Player successfully added.");
         } else {
-            System.out.println("Error adding player.");
+            logger.error("Error adding player.");
         }
     }
 
     private static void updatePlayer() {
-        System.out.println("Enter Player ID to update: ");
+        logger.info("Enter Player ID to update: ");
         Long id = scanner.nextLong();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine(); 
 
         Player existingPlayer = playerService.getPlayerById(id);
         if (existingPlayer == null) {
-            System.out.println("Player not found.");
+            logger.warn("Player not found.");
             return;
         }
 
-        System.out.println("Enter new Player Pseudo (current: " + existingPlayer.getPseudo() + "): ");
+        logger.info("Enter new Player Pseudo (current: {}): ", existingPlayer.getPseudo());
         String pseudo = scanner.nextLine();
 
-        System.out.println("Enter new Player Age (current: " + existingPlayer.getAge() + "): ");
+        logger.info("Enter new Player Age (current: {}): ", existingPlayer.getAge());
         int age = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine(); 
 
         existingPlayer.setPseudo(pseudo);
         existingPlayer.setAge(age);
 
         boolean isUpdated = playerService.updatePlayer(existingPlayer);
         if (isUpdated) {
-            System.out.println("Player successfully updated.");
+            logger.info("Player successfully updated.");
         } else {
-            System.out.println("Error updating player.");
+            logger.error("Error updating player.");
         }
     }
 
     private static void deletePlayer() {
-        System.out.println("Enter Player ID to delete: ");
+        logger.info("Enter Player ID to delete: ");
         Long id = scanner.nextLong();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine(); 
 
         boolean isDeleted = playerService.deletePlayer(id);
         if (isDeleted) {
-            System.out.println("Player successfully deleted.");
+            logger.info("Player successfully deleted.");
         } else {
-            System.out.println("Error deleting player.");
+            logger.error("Error deleting player.");
         }
     }
 
     private static void displayAllPlayers() {
         List<Player> players = playerService.getAllPlayers();
         if (players.isEmpty()) {
-            System.out.println("No players found.");
+            logger.info("No players found.");
         } else {
-            System.out.println("=== All Players ===");
-            players.forEach(System.out::println);
+            logger.info("=== All Players ===");
+            players.forEach(player -> logger.info(player.toString()));
         }
     }
 
     private static void searchPlayer() {
-        System.out.println("Enter Player ID to search: ");
+        logger.info("Enter Player ID to search: ");
         Long id = scanner.nextLong();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine(); 
 
         Player player = playerService.getPlayerById(id);
         if (player != null) {
-            System.out.println("Player found: " + player);
+            logger.info("Player found: {}", player);
         } else {
-            System.out.println("Player not found.");
+            logger.warn("Player not found.");
         }
     }
 }

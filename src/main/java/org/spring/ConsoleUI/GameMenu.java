@@ -1,5 +1,7 @@
 package org.spring.ConsoleUI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spring.models.Game;
 import org.spring.services.GameService;
 import org.spring.models.enums.GameDifficulty;
@@ -10,6 +12,7 @@ import java.util.Scanner;
 public class GameMenu {
     public static Scanner scanner;
     public static GameService gameService;
+    private static final Logger logger = LoggerFactory.getLogger(GameMenu.class);
 
     public GameMenu(GameService gService) {
         gameService = gService;
@@ -18,14 +21,14 @@ public class GameMenu {
     public static void showGameMenu(Scanner scan) {
         scanner = scan;
         while (true) {
-            System.out.println("=== Game Management Menu ===");
-            System.out.println("1. Add New Game");
-            System.out.println("2. Update Game");
-            System.out.println("3. Delete Game");
-            System.out.println("4. Display All Games");
-            System.out.println("5. Search Game");
-            System.out.println("6. Back to Main Menu");
-            System.out.print("Please select an option (1-6): ");
+            logger.info("=== Game Management Menu ===");
+            logger.info("1. Add New Game");
+            logger.info("2. Update Game");
+            logger.info("3. Delete Game");
+            logger.info("4. Display All Games");
+            logger.info("5. Search Game");
+            logger.info("6. Back to Main Menu");
+            logger.info("Please select an option (1-6): ");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -49,20 +52,20 @@ public class GameMenu {
                 case 6:
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    logger.warn("Invalid choice. Please try again.");
             }
         }
     }
 
     private static void addNewGame() {
-        System.out.println("Enter Game Name: ");
+        logger.info("Enter Game Name: ");
         String name = scanner.nextLine();
 
-        System.out.println("Enter Average Match Duration: ");
+        logger.info("Enter Average Match Duration: ");
         double avgMatchDuration = scanner.nextDouble();
-        scanner.nextLine(); 
+        scanner.nextLine();
 
-        System.out.println("Select Game Difficulty (EASY, MEDIUM, HARD , EXPERT): ");
+        logger.info("Select Game Difficulty (EASY, MEDIUM, HARD, EXPERT): ");
         GameDifficulty difficulty = GameDifficulty.valueOf(scanner.nextLine().toUpperCase());
 
         Game game = new Game();
@@ -72,31 +75,31 @@ public class GameMenu {
 
         boolean isAdded = gameService.addGame(game);
         if (isAdded) {
-            System.out.println("Game successfully added.");
+            logger.info("Game successfully added.");
         } else {
-            System.out.println("Error adding game.");
+            logger.error("Error adding game.");
         }
     }
 
     private static void updateGame() {
-        System.out.println("Enter Game ID to update: ");
+        logger.info("Enter Game ID to update: ");
         Long id = scanner.nextLong();
-        scanner.nextLine(); 
+        scanner.nextLine();
 
         Game existingGame = gameService.getGameById(id);
         if (existingGame == null) {
-            System.out.println("Game not found.");
+            logger.warn("Game not found.");
             return;
         }
 
-        System.out.println("Enter new Game Name (current: " + existingGame.getName() + "): ");
+        logger.info("Enter new Game Name (current: {}): ", existingGame.getName());
         String name = scanner.nextLine();
 
-        System.out.println("Enter new Average Match Duration (current: " + existingGame.getAvgMatchDuration() + "): ");
+        logger.info("Enter new Average Match Duration (current: {}): ", existingGame.getAvgMatchDuration());
         double avgMatchDuration = scanner.nextDouble();
-        scanner.nextLine(); 
+        scanner.nextLine();
 
-        System.out.println("Select new Game Difficulty (current: " + existingGame.getDifficulty() + "): ");
+        logger.info("Select new Game Difficulty (current: {}): ", existingGame.getDifficulty());
         GameDifficulty difficulty = GameDifficulty.valueOf(scanner.nextLine().toUpperCase());
 
         existingGame.setName(name);
@@ -105,45 +108,45 @@ public class GameMenu {
 
         boolean isUpdated = gameService.updateGame(existingGame);
         if (isUpdated) {
-            System.out.println("Game successfully updated.");
+            logger.info("Game successfully updated.");
         } else {
-            System.out.println("Error updating game.");
+            logger.error("Error updating game.");
         }
     }
 
     private static void deleteGame() {
-        System.out.println("Enter Game ID to delete: ");
+        logger.info("Enter Game ID to delete: ");
         Long id = scanner.nextLong();
-        scanner.nextLine(); 
+        scanner.nextLine();
 
         boolean isDeleted = gameService.deleteGame(id);
         if (isDeleted) {
-            System.out.println("Game successfully deleted.");
+            logger.info("Game successfully deleted.");
         } else {
-            System.out.println("Error deleting game.");
+            logger.error("Error deleting game.");
         }
     }
 
     private static void displayAllGames() {
         List<Game> games = gameService.getAllGames();
         if (games.isEmpty()) {
-            System.out.println("No games found.");
+            logger.info("No games found.");
         } else {
-            System.out.println("=== All Games ===");
-            games.forEach(System.out::println);
+            logger.info("=== All Games ===");
+            games.forEach(game -> logger.info(game.toString())); // Utilisation de logger pour afficher chaque jeu
         }
     }
 
     private static void searchGame() {
-        System.out.println("Enter Game ID to search: ");
+        logger.info("Enter Game ID to search: ");
         Long id = scanner.nextLong();
-        scanner.nextLine(); 
+        scanner.nextLine();
 
         Game game = gameService.getGameById(id);
         if (game != null) {
-            System.out.println("Game found: " + game);
+            logger.info("Game found: {}", game);
         } else {
-            System.out.println("Game not found.");
+            logger.warn("Game not found.");
         }
     }
 }
