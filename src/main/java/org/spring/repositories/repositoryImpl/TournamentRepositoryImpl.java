@@ -22,7 +22,6 @@ public class TournamentRepositoryImpl implements TournamentRepository {
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            entityManager.persist(tournament.getGame());
             entityManager.persist(tournament);
             entityManager.flush();
             transaction.commit();

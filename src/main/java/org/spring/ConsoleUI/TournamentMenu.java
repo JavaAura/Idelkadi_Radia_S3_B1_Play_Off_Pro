@@ -6,6 +6,7 @@ import org.spring.models.Game;
 import org.spring.models.Team;
 import org.spring.models.Tournament;
 import org.spring.models.enums.GameDifficulty;
+import org.spring.services.GameService;
 import org.spring.services.PlayerService;
 import org.spring.services.TeamService;
 import org.spring.services.TournamentService;
@@ -83,10 +84,10 @@ public class TournamentMenu {
         logger.info("Enter number of spectators: ");
         tournament.setNumSpectators(scanner.nextInt());
         scanner.nextLine();
-        logger.info("Enter start date (YYYY-MM-DD): ");
-        tournament.setStartDate(LocalDate.parse(scanner.nextLine()));
-        logger.info("Enter end date (YYYY-MM-DD): ");
-        tournament.setEndDate(LocalDate.parse(scanner.nextLine()));
+
+        tournament.setStartDate(InputValidator.validateDate(true));
+        tournament.setEndDate(InputValidator.validateDate(false));
+
         logger.info("Enter ceremony time: ");
         tournament.setCeremonyTime(InputValidator.validatePositiveDouble());
         logger.info("Enter break time between matches: ");
@@ -94,15 +95,28 @@ public class TournamentMenu {
 
         scanner.nextLine();
 
-        logger.info("===== Game Details =====");
-        logger.info("Enter game name: ");
-        String gameName = scanner.nextLine();
+        GameService gameService = (GameService) context.getBean("gameService");
+        List<Game> games = gameService.getAllGames();
+        if (games.isEmpty()) {
+            logger.warn("No games available.");
+            return;
+        }
 
-        Game game = new Game();
-        game.setName(gameName);
-        game.setAvgMatchDuration(20);
-        game.setDifficulty(GameDifficulty.EASY);
-        tournament.setGame(game);
+        logger.info("===== Select a Game =====");
+        for (int i = 0; i < games.size(); i++) {
+            logger.info("{}. {}", i + 1, games.get(i).getName());
+        }
+
+        int gameChoice;
+        do {
+            logger.info("Choose a game by entering the corresponding number: ");
+            gameChoice = scanner.nextInt();
+            scanner.nextLine();
+        } while (gameChoice < 1 || gameChoice > games.size());
+
+        Game selectedGame = games.get(gameChoice - 1);
+        tournament.setGame(selectedGame);
+
 
         Long tournamentId = tournamentService.createTournament(tournament);
 
@@ -144,6 +158,8 @@ public class TournamentMenu {
     private static void updateTournament() {
         logger.info("Enter tournament ID to update: ");
         Long id = scanner.nextLong();
+        scanner.nextLine();
+
         Tournament tournament = tournamentService.readTournament(id);
         if (tournament != null) {
             logger.info("Enter new title (leave blank to keep current): ");
@@ -152,9 +168,22 @@ public class TournamentMenu {
                 tournament.setTitle(title);
             }
 
+            logger.info("Updating start date. Leave blank to keep current.");
+            logger.info("Current start date: " + tournament.getStartDate());
+            LocalDate newStartDate = InputValidator.promptForDateUpdate(true, tournament.getStartDate());
+            if (newStartDate != null) {
+                tournament.setStartDate(newStartDate);
+            }
+
+            logger.info("Updating end date. Leave blank to keep current.");
+            logger.info("Current end date: " + tournament.getEndDate());
+            LocalDate newEndDate = InputValidator.promptForDateUpdate(false, tournament.getEndDate());
+            if (newEndDate != null) {
+                tournament.setEndDate(newEndDate);
+            }
+
             double estimatedDuration = tournamentService.getEstimatedDuration(tournament.getId());
             tournament.setEstimatedDuration(estimatedDuration);
-
 
             if (tournamentService.updateTournament(tournament)) {
                 logger.info("Tournament updated successfully!");
@@ -165,6 +194,9 @@ public class TournamentMenu {
             logger.warn("Tournament not found.");
         }
     }
+
+
+
 
     private static void deleteTournament() {
         logger.info("Enter tournament ID to delete: ");
