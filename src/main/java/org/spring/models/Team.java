@@ -38,6 +38,11 @@ public class Team {
         this.players = players;
     }
 
+    public Team(String team_a) {
+        this.name = name;
+
+    }
+
     public Long getId() {
         return id;
     }

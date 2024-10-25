@@ -55,9 +55,12 @@
     </bean>
 
     <bean id="tournamentRepository" class="org.spring.repositories.repositoryImpl.TournamentRepositoryImpl"/>
+    <bean id="tournamentDao" class="org.spring.dao.daoImpl.TournamentDaoExtension"/>
+
 
     <bean id="tournamentService" class="org.spring.services.serviceImpl.TournamentServiceImpl">
         <constructor-arg ref="tournamentRepository" />
+        <constructor-arg ref="tournamentDao" />
     </bean>
 
     <bean id="tournamentMenu" class="org.spring.ConsoleUI.TournamentMenu">
@@ -73,4 +76,6 @@
     <bean id="gameMenu" class="org.spring.ConsoleUI.GameMenu" >
         <constructor-arg ref="gameService"/>
     </bean>
+
+
 </beans>

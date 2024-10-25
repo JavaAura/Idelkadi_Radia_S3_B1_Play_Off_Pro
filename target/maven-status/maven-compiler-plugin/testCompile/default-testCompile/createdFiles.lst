@@ -1,0 +1,6 @@
+org\spring\services\PlayerServiceIntegrationTest.class
+org\spring\services\TournamentServiceImplTest.class
+org\spring\services\PlayerServiceImplTest.class
+org\spring\services\TeamServiceImplTest.class
+org\spring\services\GameServiceImplTest.class
+org\spring\services\TeamServiceIntegrationTest.class

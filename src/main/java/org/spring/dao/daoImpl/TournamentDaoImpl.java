@@ -15,13 +15,23 @@ public class TournamentDaoImpl implements TournamentDao {
 
     @Override
     public Double calculateEstimatedDuration(Long tournamentId) {
-        Tournament tournament= entityManager.find(Tournament.class, tournamentId);
+        Tournament tournament= readTournament(tournamentId);
 
         int numberOfTeams = tournament.getTeams().size();
         double averageMatchDuration = tournament.getGame().getAvgMatchDuration();
         double breakTime = tournament.getBreakTimeBetweenMatches();
 
         return (numberOfTeams * averageMatchDuration) + breakTime;
+    }
+    @Override
+    public Tournament readTournament(Long id) {
+        try {
+            return entityManager.find(Tournament.class, id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

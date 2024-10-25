@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TeamMenu.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Play-Of-Pro</a> &gt; <a href="index.source.html" class="el_package">org.spring.ConsoleUI</a> &gt; <span class="el_source">TeamMenu.java</span></div><h1>TeamMenu.java</h1><pre class="source lang-java linenums">package org.spring.ConsoleUI;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.spring.models.Player;
+import org.spring.models.Team;
+import org.spring.services.PlayerService;
+import org.spring.services.TeamService;
+import org.spring.utils.InputValidator;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class TeamMenu {
+<span class="nc" id="L18">    private static final Logger logger = LoggerFactory.getLogger(TeamMenu.class);</span>
+    private static Scanner scanner;
+    private static TeamService teamService;
+<span class="nc" id="L21">    private static ApplicationContext context = new ClassPathXmlApplicationContext(&quot;ApplicationContext.xml&quot;);</span>
+
+
+<span class="nc" id="L24">    public TeamMenu(TeamService teamService) {</span>
+<span class="nc" id="L25">        TeamMenu.teamService = teamService;</span>
+<span class="nc" id="L26">    }</span>
+
+    public static void showTeamMenu(Scanner scan) {
+<span class="nc" id="L29">        scanner = scan;</span>
+        while (true) {
+<span class="nc" id="L31">            logger.info(&quot;=== Team Management Menu ===&quot;);</span>
+<span class="nc" id="L32">            logger.info(&quot;1. Add New Team&quot;);</span>
+<span class="nc" id="L33">            logger.info(&quot;2. Update Team&quot;);</span>
+<span class="nc" id="L34">            logger.info(&quot;3. Delete Team&quot;);</span>
+<span class="nc" id="L35">            logger.info(&quot;4. Display All Teams&quot;);</span>
+<span class="nc" id="L36">            logger.info(&quot;5. Search Team&quot;);</span>
+<span class="nc" id="L37">            logger.info(&quot;6. Add Player to Team&quot;);</span>
+<span class="nc" id="L38">            logger.info(&quot;7. Remove Player from Team&quot;);</span>
+<span class="nc" id="L39">            logger.info(&quot;8. Back to Main Menu&quot;);</span>
+<span class="nc" id="L40">            logger.info(&quot;Please select an option (1-6): &quot;);</span>
+
+<span class="nc" id="L42">            int choice = InputValidator.validatePositiveInteger();</span>
+<span class="nc" id="L43">            scanner.nextLine();</span>
+
+<span class="nc bnc" id="L45" title="All 9 branches missed.">            switch (choice) {</span>
+                case 1:
+<span class="nc" id="L47">                    addNewTeam();</span>
+<span class="nc" id="L48">                    break;</span>
+                case 2:
+<span class="nc" id="L50">                    updateTeam();</span>
+<span class="nc" id="L51">                    break;</span>
+                case 3:
+<span class="nc" id="L53">                    deleteTeam();</span>
+<span class="nc" id="L54">                    break;</span>
+                case 4:
+<span class="nc" id="L56">                    displayAllTeams();</span>
+<span class="nc" id="L57">                    break;</span>
+                case 5:
+<span class="nc" id="L59">                    searchTeam();</span>
+<span class="nc" id="L60">                    break;</span>
+                case 6:
+<span class="nc" id="L62">                    addPlayerToTeam();</span>
+<span class="nc" id="L63">                    break;</span>
+                    case 7:
+<span class="nc" id="L65">                        removePlayerFromTeam();</span>
+<span class="nc" id="L66">                        break;</span>
+                case 8:
+<span class="nc" id="L68">                    return;</span>
+                default:
+<span class="nc" id="L70">                    logger.warn(&quot;Invalid choice. Please try again.&quot;);</span>
+            }
+<span class="nc" id="L72">        }</span>
+    }
+
+    private static void addNewTeam() {
+<span class="nc" id="L76">        logger.info(&quot;Enter Team Name: &quot;);</span>
+<span class="nc" id="L77">        String name = scanner.nextLine();</span>
+
+<span class="nc" id="L79">        logger.info(&quot;Enter Team Ranking: &quot;);</span>
+<span class="nc" id="L80">        int ranking = InputValidator.validatePositiveInteger();</span>
+
+<span class="nc" id="L82">        scanner.nextLine();</span>
+
+<span class="nc" id="L84">        Team team = new Team();</span>
+<span class="nc" id="L85">        team.setName(name);</span>
+<span class="nc" id="L86">        team.setRanking(ranking);</span>
+
+<span class="nc" id="L88">        boolean isAdded = teamService.addTeam(team);</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (isAdded) {</span>
+<span class="nc" id="L90">            logger.info(&quot;Team successfully added.&quot;);</span>
+        } else {
+<span class="nc" id="L92">            logger.error(&quot;Error adding team.&quot;);</span>
+        }
+<span class="nc" id="L94">    }</span>
+
+    private static void updateTeam() {
+<span class="nc" id="L97">        logger.info(&quot;Enter Team ID to update: &quot;);</span>
+<span class="nc" id="L98">        Long id = scanner.nextLong();</span>
+<span class="nc" id="L99">        scanner.nextLine();</span>
+
+<span class="nc" id="L101">        Team existingTeam = teamService.getTeamById(id);</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (existingTeam == null) {</span>
+<span class="nc" id="L103">            logger.warn(&quot;Team not found.&quot;);</span>
+<span class="nc" id="L104">            return;</span>
+        }
+
+<span class="nc" id="L107">        logger.info(&quot;Enter new Team Name (current: {}): &quot;, existingTeam.getName());</span>
+<span class="nc" id="L108">        String name = scanner.nextLine();</span>
+
+<span class="nc" id="L110">        logger.info(&quot;Enter new Team Ranking (current: {}): &quot;, existingTeam.getRanking());</span>
+<span class="nc" id="L111">        int ranking = InputValidator.validatePositiveInteger();</span>
+<span class="nc" id="L112">        scanner.nextLine();</span>
+
+<span class="nc" id="L114">        existingTeam.setName(name);</span>
+<span class="nc" id="L115">        existingTeam.setRanking(ranking);</span>
+
+<span class="nc" id="L117">        boolean isUpdated = teamService.updateTeam(existingTeam);</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (isUpdated) {</span>
+<span class="nc" id="L119">            logger.info(&quot;Team successfully updated.&quot;);</span>
+        } else {
+<span class="nc" id="L121">            logger.error(&quot;Error updating team.&quot;);</span>
+        }
+<span class="nc" id="L123">    }</span>
+
+    private static void deleteTeam() {
+<span class="nc" id="L126">        logger.info(&quot;Enter Team ID to delete: &quot;);</span>
+<span class="nc" id="L127">        Long id = scanner.nextLong();</span>
+<span class="nc" id="L128">        scanner.nextLine();</span>
+
+<span class="nc" id="L130">        boolean isDeleted = teamService.deleteTeam(id);</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">        if (isDeleted) {</span>
+<span class="nc" id="L132">            logger.info(&quot;Team successfully deleted.&quot;);</span>
+        } else {
+<span class="nc" id="L134">            logger.error(&quot;Error deleting team.&quot;);</span>
+        }
+<span class="nc" id="L136">    }</span>
+
+    private static void displayAllTeams() {
+<span class="nc" id="L139">        List&lt;Team&gt; teams = teamService.getAllTeams();</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        if (teams.isEmpty()) {</span>
+<span class="nc" id="L141">            logger.info(&quot;No teams found.&quot;);</span>
+        } else {
+<span class="nc" id="L143">            logger.info(&quot;=== All Teams ===&quot;);</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">            for (Team team : teams) {</span>
+<span class="nc" id="L145">                logger.info(&quot;{}&quot;, team);</span>
+<span class="nc" id="L146">            }</span>
+        }
+<span class="nc" id="L148">    }</span>
+
+    private static void searchTeam() {
+<span class="nc" id="L151">        logger.info(&quot;Enter Team ID to search: &quot;);</span>
+<span class="nc" id="L152">        Long id = scanner.nextLong();</span>
+<span class="nc" id="L153">        scanner.nextLine();</span>
+
+<span class="nc" id="L155">        Team team = teamService.getTeamById(id);</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">        if (team != null) {</span>
+<span class="nc" id="L157">            logger.info(&quot;Team found: {}&quot;, team);</span>
+        } else {
+<span class="nc" id="L159">            logger.warn(&quot;Team not found.&quot;);</span>
+        }
+<span class="nc" id="L161">    }</span>
+
+
+    private static void addPlayerToTeam() {
+<span class="nc" id="L165">        logger.info(&quot;Enter Team ID to add players: &quot;);</span>
+<span class="nc" id="L166">        Long teamId = scanner.nextLong();</span>
+<span class="nc" id="L167">        scanner.nextLine();</span>
+
+<span class="nc" id="L169">        Team team = teamService.getTeamById(teamId);</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        if (team == null) {</span>
+<span class="nc" id="L171">            logger.warn(&quot;Team not found.&quot;);</span>
+<span class="nc" id="L172">            return;</span>
+        }
+<span class="nc" id="L174">        PlayerService playerService = (PlayerService) context.getBean(&quot;playerService&quot;);</span>
+
+        while (true) {
+<span class="nc" id="L177">            logger.info(&quot;Enter Player ID to add to the team (or 0 to stop): &quot;);</span>
+<span class="nc" id="L178">            Long playerId = scanner.nextLong();</span>
+<span class="nc" id="L179">            scanner.nextLine();</span>
+
+<span class="nc bnc" id="L181" title="All 2 branches missed.">            if (playerId == 0) {</span>
+<span class="nc" id="L182">                break;</span>
+            }
+
+<span class="nc" id="L185">            Player player = playerService.getPlayerById(playerId);</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">            if (player != null) {</span>
+
+<span class="nc" id="L188">                player.setTeam(team);</span>
+<span class="nc" id="L189">                playerService.updatePlayer(player);</span>
+<span class="nc" id="L190">                logger.info(&quot;Player {} added to team {}.&quot;, player.getPseudo(), team.getName());</span>
+            } else {
+<span class="nc" id="L192">                logger.warn(&quot;Player with ID {} not found.&quot;, playerId);</span>
+            }
+<span class="nc" id="L194">        }</span>
+
+<span class="nc" id="L196">        logger.info(&quot;All players have been added to the team.&quot;);</span>
+<span class="nc" id="L197">    }</span>
+
+    private static void removePlayerFromTeam() {
+<span class="nc" id="L200">        logger.info(&quot;Enter Team ID to remove players from: &quot;);</span>
+<span class="nc" id="L201">        Long teamId = scanner.nextLong();</span>
+<span class="nc" id="L202">        scanner.nextLine();</span>
+
+<span class="nc" id="L204">        Team team = teamService.getTeamById(teamId);</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">        if (team == null) {</span>
+<span class="nc" id="L206">            logger.warn(&quot;Team not found.&quot;);</span>
+<span class="nc" id="L207">            return;</span>
+        }
+
+<span class="nc" id="L210">        PlayerService playerService = (PlayerService) context.getBean(&quot;playerService&quot;);</span>
+
+<span class="nc bnc" id="L212" title="All 2 branches missed.">        List&lt;Player&gt; players = playerService.getAllPlayers().stream().filter(player -&gt; player.getTeam() == team).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">        if (players.isEmpty()) {</span>
+<span class="nc" id="L214">            logger.warn(&quot;No players found in this team.&quot;);</span>
+<span class="nc" id="L215">            return;</span>
+        }
+
+<span class="nc" id="L218">        logger.info(&quot;Players in team {}: &quot;, team.getName());</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">        for (Player player : players) {</span>
+<span class="nc" id="L220">            logger.info(&quot;ID: {}, Pseudo: {}&quot;, player.getId(), player.getPseudo());</span>
+<span class="nc" id="L221">        }</span>
+
+        while (true) {
+<span class="nc" id="L224">            logger.info(&quot;Enter Player ID to remove from the team (or 0 to stop): &quot;);</span>
+<span class="nc" id="L225">            Long playerId = scanner.nextLong();</span>
+<span class="nc" id="L226">            scanner.nextLine();</span>
+
+<span class="nc bnc" id="L228" title="All 2 branches missed.">            if (playerId == 0) {</span>
+<span class="nc" id="L229">                break;</span>
+            }
+
+<span class="nc" id="L232">            Player player = playerService.getPlayerById(playerId);</span>
+<span class="nc bnc" id="L233" title="All 6 branches missed.">            if (player != null &amp;&amp; player.getTeam() != null &amp;&amp; player.getTeam().getId().equals(teamId)) {</span>
+<span class="nc" id="L234">                player.setTeam(null);</span>
+<span class="nc" id="L235">                playerService.updatePlayer(player);</span>
+<span class="nc" id="L236">                logger.info(&quot;Player {} removed from team {}.&quot;, player.getPseudo(), team.getName());</span>
+            } else {
+<span class="nc" id="L238">                logger.warn(&quot;Player with ID {} not found in this team.&quot;, playerId);</span>
+            }
+<span class="nc" id="L240">        }</span>
+
+<span class="nc" id="L242">        logger.info(&quot;Players have been removed from the team.&quot;);</span>
+<span class="nc" id="L243">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

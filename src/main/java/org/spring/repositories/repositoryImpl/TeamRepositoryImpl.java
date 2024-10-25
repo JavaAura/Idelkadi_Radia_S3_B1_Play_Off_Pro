@@ -16,6 +16,10 @@ public class TeamRepositoryImpl implements TeamRepository {
         this.entityManager = EntityManagerSingleton.getInstance().getEntityManager();
     }
 
+    public TeamRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     @Override
     public boolean createTeam(Team team) {
         EntityTransaction transaction = null;

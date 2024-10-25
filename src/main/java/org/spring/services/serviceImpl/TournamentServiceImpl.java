@@ -11,9 +11,10 @@ import java.util.List;
 public class TournamentServiceImpl implements TournamentService {
 
     private final TournamentRepository tournamentRepository;
-
-    public TournamentServiceImpl(TournamentRepository tournamentRepository) {
+    private final TournamentDao tournamentDao;
+    public TournamentServiceImpl(TournamentRepository tournamentRepository , TournamentDao tournamentDao) {
         this.tournamentRepository = tournamentRepository;
+        this.tournamentDao = tournamentDao;
     }
     @Override
     public Long createTournament(Tournament tournament) {
@@ -42,8 +43,6 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     public Double getEstimatedDuration(Long tournamentId) {
-//        TournamentDao tournamentDao = new TournamentDaoImpl();
-        TournamentDao tournamentDao = new TournamentDaoExtension();
         return tournamentDao.calculateEstimatedDuration(tournamentId);
     }
 }

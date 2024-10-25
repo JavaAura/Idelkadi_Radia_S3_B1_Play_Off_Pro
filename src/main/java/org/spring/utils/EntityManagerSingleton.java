@@ -10,7 +10,8 @@ public class EntityManagerSingleton {
     private static  EntityManager entityManager;
 
     private EntityManagerSingleton() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("tournament");
+        String persistenceName = System.getProperty("puName", "tournament");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceName);
         this.entityManager = emf.createEntityManager();
     }
 

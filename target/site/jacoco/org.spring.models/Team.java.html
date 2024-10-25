@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Team.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Play-Of-Pro</a> &gt; <a href="index.source.html" class="el_package">org.spring.models</a> &gt; <span class="el_source">Team.java</span></div><h1>Team.java</h1><pre class="source lang-java linenums">package org.spring.models;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Table(name = &quot;team&quot;)
+public class Team {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank(message = &quot;Team name cannot be blank&quot;)
+    @Column(nullable = false)
+    private String name;
+
+    @Min(value = 1, message = &quot;Ranking must be a positive number or zero&quot;)
+    @Column(nullable = true)
+    private int ranking;
+
+    @OneToMany(mappedBy = &quot;team&quot;, cascade = CascadeType.ALL, orphanRemoval = true , fetch = FetchType.EAGER)
+    private List&lt;Player&gt; players;
+
+<span class="pc" id="L28">    @ManyToMany(mappedBy = &quot;teams&quot;, cascade = CascadeType.ALL , fetch = FetchType.EAGER)</span>
+    private Set&lt;Tournament&gt; tournaments = new HashSet&lt;&gt;();
+
+<span class="fc" id="L31">    public Team() {</span>
+<span class="fc" id="L32">    }</span>
+
+<span class="nc" id="L34">    public Team(Long id, String name, int ranking, List&lt;Player&gt; players) {</span>
+<span class="nc" id="L35">        this.id = id;</span>
+<span class="nc" id="L36">        this.name = name;</span>
+<span class="nc" id="L37">        this.ranking = ranking;</span>
+<span class="nc" id="L38">        this.players = players;</span>
+<span class="nc" id="L39">    }</span>
+
+<span class="nc" id="L41">    public Team(String team_a) {</span>
+<span class="nc" id="L42">        this.name = name;</span>
+
+<span class="nc" id="L44">    }</span>
+
+    public Long getId() {
+<span class="fc" id="L47">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L51">        this.id = id;</span>
+<span class="nc" id="L52">    }</span>
+
+    public String getName() {
+<span class="fc" id="L55">        return name;</span>
+    }
+
+    public void setName(String name) {
+<span class="fc" id="L59">        this.name = name;</span>
+<span class="fc" id="L60">    }</span>
+
+    public int getRanking() {
+<span class="nc" id="L63">        return ranking;</span>
+    }
+
+    public void setRanking(int ranking) {
+<span class="fc" id="L67">        this.ranking = ranking;</span>
+<span class="fc" id="L68">    }</span>
+
+    public List&lt;Player&gt; getPlayers() {
+<span class="nc" id="L71">        return players;</span>
+    }
+
+    public void setPlayers(List&lt;Player&gt; players) {
+<span class="nc" id="L75">        this.players = players;</span>
+<span class="nc" id="L76">    }</span>
+
+    public Set&lt;Tournament&gt; getTournaments() {
+<span class="nc" id="L79">        return tournaments;</span>
+    }
+
+    public void setTournaments(Set&lt;Tournament&gt; tournaments) {
+<span class="nc" id="L83">        this.tournaments = tournaments;</span>
+<span class="nc" id="L84">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L88">        return &quot;Team{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, name='&quot; + name + '\'' +
+                &quot;, ranking=&quot; + ranking +
+                '}';
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
