@@ -80,9 +80,9 @@ The project is organized into several layers to maintain clean separation and ma
 Include screenshots of key functionalities:
 ![Main Menu](screenshots/main_menu.png)
 ![Player Management](screenshots/player_management.png)
-![Tournament Menu](screenshots/tournament_menu.png)
+![Tournament Menu](screenshots/tournament_management.png)
 ![Team Management](screenshots/team_management.png)
-![Game Menu](screenshots/Game_menu.png)
+![Game Menu](screenshots/game_management.png)
 
 ## Potential Future Enhancements
 
