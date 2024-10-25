@@ -5,27 +5,29 @@ import org.slf4j.LoggerFactory;
 import org.spring.ConsoleUI.TeamMenu;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-<span class="nc" id="L11">public class InputValidator {</span>
-<span class="nc" id="L12">    private static final Scanner scanner =ScannerUtil.getInstance();</span>
-<span class="nc" id="L13">    private static final Logger logger = LoggerFactory.getLogger(TeamMenu.class);</span>
+<span class="nc" id="L13">public class InputValidator {</span>
+<span class="nc" id="L14">    private static final Scanner scanner =ScannerUtil.getInstance();</span>
+<span class="nc" id="L15">    private static final Logger logger = LoggerFactory.getLogger(TeamMenu.class);</span>
 
     public static int validatePositiveInteger() {
         int value;
         while (true) {
             try {
-<span class="nc" id="L19">                value = scanner.nextInt();</span>
-<span class="nc bnc" id="L20" title="All 2 branches missed.">                if (value &lt; 0) {</span>
-<span class="nc" id="L21">                    logger.info(&quot;Value must be a positive integer.&quot;);</span>
+<span class="nc" id="L21">                value = scanner.nextInt();</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">                if (value &lt; 0) {</span>
+<span class="nc" id="L23">                    logger.info(&quot;Value must be a positive integer.&quot;);</span>
                 } else {
-<span class="nc" id="L23">                    return value;</span>
+<span class="nc" id="L25">                    return value;</span>
                 }
-<span class="nc" id="L25">            } catch (InputMismatchException e) {</span>
-<span class="nc" id="L26">                logger.warn(&quot;Invalid input. Please enter a valid positive integer.&quot;);</span>
-<span class="nc" id="L27">                scanner.next();</span>
-<span class="nc" id="L28">            }</span>
+<span class="nc" id="L27">            } catch (InputMismatchException e) {</span>
+<span class="nc" id="L28">                logger.warn(&quot;Invalid input. Please enter a valid positive integer.&quot;);</span>
+<span class="nc" id="L29">                scanner.next();</span>
+<span class="nc" id="L30">            }</span>
         }
     }
 
@@ -33,16 +35,16 @@ import java.util.Scanner;
         int age;
         while (true) {
             try {
-<span class="nc" id="L36">                age = scanner.nextInt();</span>
-<span class="nc bnc" id="L37" title="All 2 branches missed.">                if (age &lt; 16) {</span>
-<span class="nc" id="L38">                    logger.info(&quot;Age must be at least 16.&quot;);</span>
+<span class="nc" id="L38">                age = scanner.nextInt();</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">                if (age &lt; 16) {</span>
+<span class="nc" id="L40">                    logger.info(&quot;Age must be at least 16.&quot;);</span>
                 } else {
-<span class="nc" id="L40">                    return age;</span>
+<span class="nc" id="L42">                    return age;</span>
                 }
-<span class="nc" id="L42">            } catch (InputMismatchException e) {</span>
-<span class="nc" id="L43">                logger.warn(&quot;Invalid input. Please enter a valid number.&quot;);</span>
-<span class="nc" id="L44">                scanner.next();</span>
-<span class="nc" id="L45">            }</span>
+<span class="nc" id="L44">            } catch (InputMismatchException e) {</span>
+<span class="nc" id="L45">                logger.warn(&quot;Invalid input. Please enter a valid number.&quot;);</span>
+<span class="nc" id="L46">                scanner.next();</span>
+<span class="nc" id="L47">            }</span>
         }
     }
 
@@ -50,54 +52,85 @@ import java.util.Scanner;
         double value;
         while (true) {
             try {
-<span class="nc" id="L53">                value = scanner.nextDouble();</span>
-<span class="nc bnc" id="L54" title="All 2 branches missed.">                if (value &lt; 0) {</span>
-<span class="nc" id="L55">                    logger.info(&quot;Value must be positive.&quot;);</span>
+<span class="nc" id="L55">                value = scanner.nextDouble();</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                if (value &lt; 0) {</span>
+<span class="nc" id="L57">                    logger.info(&quot;Value must be positive.&quot;);</span>
                 } else {
-<span class="nc" id="L57">                    return value;</span>
+<span class="nc" id="L59">                    return value;</span>
                 }
-<span class="nc" id="L59">            } catch (InputMismatchException e) {</span>
-<span class="nc" id="L60">               logger.warn(&quot;Invalid input. Please enter a valid positive number.&quot;);</span>
-<span class="nc" id="L61">                scanner.next();</span>
-<span class="nc" id="L62">            }</span>
+<span class="nc" id="L61">            } catch (InputMismatchException e) {</span>
+<span class="nc" id="L62">               logger.warn(&quot;Invalid input. Please enter a valid positive number.&quot;);</span>
+<span class="nc" id="L63">                scanner.next();</span>
+<span class="nc" id="L64">            }</span>
         }
     }
 
     public static &lt;T extends Enum&lt;T&gt;&gt; T validateEnum(Class&lt;T&gt; enumClass) {
         while (true) {
-<span class="nc" id="L68">            String input = scanner.next().toUpperCase();</span>
+<span class="nc" id="L70">            String input = scanner.next().toUpperCase();</span>
             try {
-<span class="nc" id="L70">                return Enum.valueOf(enumClass, input);</span>
-<span class="nc" id="L71">            } catch (IllegalArgumentException e) {</span>
-<span class="nc" id="L72">                System.out.println(&quot;Invalid input. Please enter a valid option from: &quot; + String.join(&quot;, &quot;, getEnumNames(enumClass)));</span>
+<span class="nc" id="L72">                return Enum.valueOf(enumClass, input);</span>
+<span class="nc" id="L73">            } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L74">                System.out.println(&quot;Invalid input. Please enter a valid option from: &quot; + String.join(&quot;, &quot;, getEnumNames(enumClass)));</span>
             }
-<span class="nc" id="L74">        }</span>
+<span class="nc" id="L76">        }</span>
     }
 
     private static &lt;T extends Enum&lt;T&gt;&gt; String[] getEnumNames(Class&lt;T&gt; enumClass) {
-<span class="nc" id="L78">        T[] enums = enumClass.getEnumConstants();</span>
-<span class="nc" id="L79">        String[] names = new String[enums.length];</span>
-<span class="nc bnc" id="L80" title="All 2 branches missed.">        for (int i = 0; i &lt; enums.length; i++) {</span>
-<span class="nc" id="L81">            names[i] = enums[i].name();</span>
+<span class="nc" id="L80">        T[] enums = enumClass.getEnumConstants();</span>
+<span class="nc" id="L81">        String[] names = new String[enums.length];</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (int i = 0; i &lt; enums.length; i++) {</span>
+<span class="nc" id="L83">            names[i] = enums[i].name();</span>
         }
-<span class="nc" id="L83">        return names;</span>
+<span class="nc" id="L85">        return names;</span>
     }
 
-    public static LocalDate validateDate( boolean isStartDate) {
+    public static LocalDate validateDate(boolean isStartDate) {
         LocalDate date;
+<span class="nc" id="L90">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;);</span>
+
         while (true) {
-<span class="nc" id="L89">            date = LocalDate.parse(scanner.next());</span>
-<span class="nc" id="L90">            LocalDate today = LocalDate.now();</span>
-<span class="nc bnc" id="L91" title="All 4 branches missed.">            if (isStartDate &amp;&amp; date.isBefore(today)) {</span>
-<span class="nc" id="L92">               logger.warn(&quot;Start date must not be before today.&quot;);</span>
-<span class="nc bnc" id="L93" title="All 4 branches missed.">            } else if (!isStartDate &amp;&amp; date.isBefore(today)) {</span>
-<span class="nc" id="L94">                logger.warn(&quot;End date must not be before today.&quot;);</span>
-<span class="nc bnc" id="L95" title="All 4 branches missed.">            } else if (!isStartDate &amp;&amp; date.isBefore(LocalDate.now())) {</span>
-<span class="nc" id="L96">                logger.warn(&quot;End date must be after the start date.&quot;);</span>
+            try {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                logger.info(&quot;Enter &quot; + (isStartDate ? &quot;start&quot; : &quot;end&quot;) + &quot; date (YYYY-MM-DD): &quot;);</span>
+<span class="nc" id="L95">                String input = scanner.nextLine();</span>
+<span class="nc" id="L96">                date = LocalDate.parse(input, formatter);</span>
+
+<span class="nc" id="L98">                LocalDate today = LocalDate.now();</span>
+<span class="nc bnc" id="L99" title="All 4 branches missed.">                if (isStartDate &amp;&amp; date.isBefore(today)) {</span>
+<span class="nc" id="L100">                    logger.warn(&quot;Start date must not be before today.&quot;);</span>
+<span class="nc bnc" id="L101" title="All 4 branches missed.">                } else if (!isStartDate &amp;&amp; date.isBefore(today)) {</span>
+<span class="nc" id="L102">                    logger.warn(&quot;End date must not be before today.&quot;);</span>
+<span class="nc bnc" id="L103" title="All 4 branches missed.">                } else if (!isStartDate &amp;&amp; date.isBefore(validateDate(true))) {</span>
+<span class="nc" id="L104">                    logger.warn(&quot;End date must be after the start date.&quot;);</span>
+                } else {
+<span class="nc" id="L106">                    return date;</span>
+                }
+<span class="nc" id="L108">            } catch (DateTimeParseException e) {</span>
+<span class="nc" id="L109">                logger.warn(&quot;Invalid date format. Please enter the date in YYYY-MM-DD format.&quot;);</span>
+<span class="nc" id="L110">            }</span>
+
+        }
+    }
+
+    public static LocalDate promptForDateUpdate(boolean isStartDate, LocalDate currentDate) {
+<span class="nc" id="L116">        logger.info(&quot;Press Enter to keep current date (&quot; + currentDate + &quot;), or enter a new date (YYYY-MM-DD): &quot;);</span>
+<span class="nc" id="L117">        String input = scanner.nextLine().trim();</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (input.isEmpty()) {</span>
+<span class="nc" id="L119">            return currentDate;</span>
+        }
+
+        try {
+<span class="nc" id="L123">            LocalDate newDate = LocalDate.parse(input, DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;));</span>
+<span class="nc bnc" id="L124" title="All 6 branches missed.">            if ((isStartDate &amp;&amp; !newDate.isBefore(LocalDate.now())) ||</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                    (!isStartDate &amp;&amp; !newDate.isBefore(currentDate))) {</span>
+<span class="nc" id="L126">                return newDate;</span>
             } else {
-<span class="nc" id="L98">                return date;</span>
+<span class="nc" id="L128">                logger.warn(&quot;Invalid date entered. Please try again.&quot;);</span>
             }
-<span class="nc" id="L100">        }</span>
+<span class="nc" id="L130">        } catch (DateTimeParseException e) {</span>
+<span class="nc" id="L131">            logger.warn(&quot;Invalid date format. Please enter a date in YYYY-MM-DD format.&quot;);</span>
+<span class="nc" id="L132">        }</span>
+<span class="nc" id="L133">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
