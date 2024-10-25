@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+
+
+
+
+    <bean id="dataSourceTest" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver" />
+        <property name="url" value="jdbc:h2:mem:tournament_db;DB_CLOSE_DELAY=-1" />
+        <property name="username" value="sa" />
+        <property name="password" value="" />
+    </bean>
+
+
+    <bean id="entityManagerFactoryTest" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="tournamentTest" />
+        <property name="dataSource" ref="dataSourceTest" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <bean id="transactionManagerTest" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactoryTest" />
+    </bean>
+
+
+    <bean id="teamRepositoryTest" class="org.spring.repositories.repositoryImpl.TeamRepositoryImpl"/>
+
+    <!-- Beans for services -->
+    <bean id="teamServiceTest" class="org.spring.services.serviceImpl.TeamServiceImpl">
+        <constructor-arg ref="teamRepositoryTest" />
+    </bean>
+
+
+    <bean id="playerRepositoryTest" class="org.spring.repositories.repositoryImpl.PlayerRepositoryImpl"/>
+
+    <bean id="playerServiceTest" class="org.spring.services.serviceImpl.PlayerServiceImpl">
+        <constructor-arg ref="playerRepositoryTest" />
+    </bean>
+
+</beans>

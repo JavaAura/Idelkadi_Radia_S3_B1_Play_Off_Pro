@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Play-Of-Pro</a> &gt; <a href="index.source.html" class="el_package">org.spring.services.serviceImpl</a> &gt; <span class="el_source">GameServiceImpl.java</span></div><h1>GameServiceImpl.java</h1><pre class="source lang-java linenums">package org.spring.services.serviceImpl;
+
+import org.spring.models.Game;
+import org.spring.repositories.GameRepository;
+import org.spring.services.GameService;
+
+import java.util.List;
+
+public class GameServiceImpl implements GameService {
+    private final GameRepository gameRepository;
+
+<span class="fc" id="L12">    public GameServiceImpl(GameRepository gameRepo) {</span>
+<span class="fc" id="L13">        this.gameRepository = gameRepo;</span>
+<span class="fc" id="L14">    }</span>
+
+    @Override
+    public boolean addGame(Game game) {
+        try {
+<span class="fc" id="L19">            gameRepository.save(game);</span>
+<span class="fc" id="L20">            return true;</span>
+<span class="nc" id="L21">        } catch (Exception e) {</span>
+
+<span class="nc" id="L23">            return false;</span>
+        }
+    }
+
+    @Override
+    public boolean updateGame(Game game) {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (gameRepository.findById(game.getId()) != null) {</span>
+<span class="fc" id="L30">            gameRepository.save(game);</span>
+<span class="fc" id="L31">            return true;</span>
+        }
+<span class="fc" id="L33">        return false;</span>
+
+    }
+
+    @Override
+    public boolean deleteGame(Long id) {
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (gameRepository.findById(id) != null) {</span>
+<span class="fc" id="L40">            gameRepository.delete(id);</span>
+<span class="fc" id="L41">            return true;</span>
+        }
+<span class="fc" id="L43">        return false;</span>
+
+    }
+
+    @Override
+    public Game getGameById(Long id) {
+<span class="fc" id="L49">        return gameRepository.findById(id);</span>
+    }
+
+    @Override
+    public List&lt;Game&gt; getAllGames() {
+<span class="fc" id="L54">        return gameRepository.findAll();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

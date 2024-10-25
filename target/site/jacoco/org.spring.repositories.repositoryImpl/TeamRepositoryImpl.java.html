@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TeamRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Play-Of-Pro</a> &gt; <a href="index.source.html" class="el_package">org.spring.repositories.repositoryImpl</a> &gt; <span class="el_source">TeamRepositoryImpl.java</span></div><h1>TeamRepositoryImpl.java</h1><pre class="source lang-java linenums">package org.spring.repositories.repositoryImpl;
+
+import org.spring.models.Team;
+import org.spring.repositories.TeamRepository;
+import org.spring.utils.EntityManagerSingleton;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import java.util.List;
+
+public class TeamRepositoryImpl implements TeamRepository {
+
+    private EntityManager entityManager;
+
+<span class="fc" id="L15">    public TeamRepositoryImpl() {</span>
+<span class="fc" id="L16">        this.entityManager = EntityManagerSingleton.getInstance().getEntityManager();</span>
+<span class="fc" id="L17">    }</span>
+
+<span class="nc" id="L19">    public TeamRepositoryImpl(EntityManager entityManager) {</span>
+<span class="nc" id="L20">        this.entityManager = entityManager;</span>
+<span class="nc" id="L21">    }</span>
+
+    @Override
+    public boolean createTeam(Team team) {
+<span class="fc" id="L25">        EntityTransaction transaction = null;</span>
+        try {
+<span class="fc" id="L27">            transaction = entityManager.getTransaction();</span>
+<span class="fc" id="L28">            transaction.begin();</span>
+<span class="fc" id="L29">            entityManager.persist(team);</span>
+<span class="fc" id="L30">            entityManager.flush();</span>
+<span class="fc" id="L31">            transaction.commit();</span>
+<span class="fc" id="L32">            return true;</span>
+<span class="nc" id="L33">        } catch (Exception e) {</span>
+<span class="nc bnc" id="L34" title="All 4 branches missed.">            if (transaction != null &amp;&amp; transaction.isActive()) {</span>
+<span class="nc" id="L35">                transaction.rollback();</span>
+            }
+<span class="nc" id="L37">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L38">            e.printStackTrace();</span>
+<span class="nc" id="L39">            return false;</span>
+        }
+    }
+
+    @Override
+    public Team readTeam(Long id) {
+        try {
+<span class="fc" id="L46">            return entityManager.find(Team.class, id);</span>
+<span class="nc" id="L47">        } catch (Exception e) {</span>
+<span class="nc" id="L48">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L49">            e.printStackTrace();</span>
+<span class="nc" id="L50">            return null;</span>
+        }
+    }
+
+    @Override
+    public List&lt;Team&gt; readAllTeams() {
+<span class="fc" id="L56">        EntityTransaction transaction = null;</span>
+        try {
+<span class="fc" id="L58">            transaction = entityManager.getTransaction();</span>
+<span class="fc" id="L59">            transaction.begin();</span>
+<span class="fc" id="L60">            List&lt;Team&gt; teams = entityManager.createQuery(&quot;SELECT t FROM Team t&quot;, Team.class).getResultList();</span>
+<span class="fc" id="L61">            transaction.commit();</span>
+<span class="fc" id="L62">            return teams;</span>
+<span class="nc" id="L63">        } catch (Exception e) {</span>
+<span class="nc bnc" id="L64" title="All 4 branches missed.">            if (transaction != null &amp;&amp; transaction.isActive()) {</span>
+<span class="nc" id="L65">                transaction.rollback();</span>
+            }
+<span class="nc" id="L67">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L68">            e.printStackTrace();</span>
+<span class="nc" id="L69">            return null;</span>
+        }
+    }
+
+    @Override
+    public boolean updateTeam(Team team) {
+<span class="fc" id="L75">        EntityTransaction transaction = null;</span>
+        try {
+<span class="fc" id="L77">            transaction = entityManager.getTransaction();</span>
+<span class="fc" id="L78">            transaction.begin();</span>
+<span class="fc" id="L79">            entityManager.merge(team);</span>
+<span class="fc" id="L80">            transaction.commit();</span>
+<span class="fc" id="L81">            return true;</span>
+<span class="nc" id="L82">        } catch (Exception e) {</span>
+<span class="nc bnc" id="L83" title="All 4 branches missed.">            if (transaction != null &amp;&amp; transaction.isActive()) {</span>
+<span class="nc" id="L84">                transaction.rollback();</span>
+            }
+<span class="nc" id="L86">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L87">            e.printStackTrace();</span>
+<span class="nc" id="L88">            return false;</span>
+        }
+    }
+
+    @Override
+    public boolean deleteTeam(Long id) {
+<span class="fc" id="L94">        EntityTransaction transaction = null;</span>
+        try {
+<span class="fc" id="L96">            transaction = entityManager.getTransaction();</span>
+<span class="fc" id="L97">            transaction.begin();</span>
+<span class="fc" id="L98">            Team team = entityManager.find(Team.class, id);</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">            if (team != null) {</span>
+<span class="fc" id="L100">                entityManager.remove(team);</span>
+<span class="fc" id="L101">                transaction.commit();</span>
+<span class="fc" id="L102">                return true;</span>
+            }
+<span class="nc" id="L104">            transaction.rollback();</span>
+<span class="nc" id="L105">            return false;</span>
+<span class="nc" id="L106">        } catch (Exception e) {</span>
+<span class="nc bnc" id="L107" title="All 4 branches missed.">            if (transaction != null &amp;&amp; transaction.isActive()) {</span>
+<span class="nc" id="L108">                transaction.rollback();</span>
+            }
+<span class="nc" id="L110">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L111">            e.printStackTrace();</span>
+<span class="nc" id="L112">            return false;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

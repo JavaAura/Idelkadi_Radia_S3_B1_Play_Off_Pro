@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.spring.services.TeamServiceIntegrationTest" time="3.083" tests="4" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="puName" value="tournamentTest"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\aidar\Desktop\projects\JAVA\Play-Of-Pro\target\test-classes;C:\Users\aidar\Desktop\projects\JAVA\Play-Of-Pro\target\classes;C:\Users\aidar\.m2\repository\javax\mvc\javax.mvc-api\1.0.0\javax.mvc-api-1.0.0.jar;C:\Users\aidar\.m2\repository\org\hibernate\hibernate-core\5.6.1.Final\hibernate-core-5.6.1.Final.jar;C:\Users\aidar\.m2\repository\org\jboss\logging\jboss-logging\3.4.2.Final\jboss-logging-3.4.2.Final.jar;C:\Users\aidar\.m2\repository\net\bytebuddy\byte-buddy\1.11.20\byte-buddy-1.11.20.jar;C:\Users\aidar\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\aidar\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.1.1.Final\jboss-transaction-api_1.2_spec-1.1.1.Final.jar;C:\Users\aidar\.m2\repository\org\jboss\jandex\2.2.3.Final\jandex-2.2.3.Final.jar;C:\Users\aidar\.m2\repository\com\fasterxml\classmate\1.5.1\classmate-1.5.1.jar;C:\Users\aidar\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\aidar\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.1.2.Final\hibernate-commons-annotations-5.1.2.Final.jar;C:\Users\aidar\.m2\repository\javax\xml\bind\jaxb-api\2.3.1\jaxb-api-2.3.1.jar;C:\Users\aidar\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.1\jaxb-runtime-2.3.1.jar;C:\Users\aidar\.m2\repository\org\glassfish\jaxb\txw2\2.3.1\txw2-2.3.1.jar;C:\Users\aidar\.m2\repository\com\sun\istack\istack-commons-runtime\3.0.7\istack-commons-runtime-3.0.7.jar;C:\Users\aidar\.m2\repository\org\jvnet\staxex\stax-ex\1.8\stax-ex-1.8.jar;C:\Users\aidar\.m2\repository\com\sun\xml\fastinfoset\FastInfoset\1.2.15\FastInfoset-1.2.15.jar;C:\Users\aidar\.m2\repository\javax\persistence\javax.persistence-api\2.2\javax.persistence-api-2.2.jar;C:\Users\aidar\.m2\repository\org\hibernate\validator\hibernate-validator\6.2.0.Final\hibernate-validator-6.2.0.Final.jar;C:\Users\aidar\.m2\repository\jakarta\validation\jakarta.validation-api\2.0.2\jakarta.validation-api-2.0.2.jar;C:\Users\aidar\.m2\repository\org\slf4j\slf4j-api\2.0.12\slf4j-api-2.0.12.jar;C:\Users\aidar\.m2\repository\ch\qos\logback\logback-classic\1.3.3\logback-classic-1.3.3.jar;C:\Users\aidar\.m2\repository\com\sun\mail\javax.mail\1.6.2\javax.mail-1.6.2.jar;C:\Users\aidar\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;C:\Users\aidar\.m2\repository\ch\qos\logback\logback-core\1.3.3\logback-core-1.3.3.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-core\5.3.24\spring-core-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-jcl\5.3.24\spring-jcl-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-context\5.3.24\spring-context-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-aop\5.3.24\spring-aop-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-beans\5.3.24\spring-beans-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-expression\5.3.24\spring-expression-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-jdbc\5.3.24\spring-jdbc-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-orm\5.3.24\spring-orm-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-tx\5.3.24\spring-tx-5.3.24.jar;C:\Users\aidar\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar;C:\Users\aidar\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\aidar\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\aidar\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\aidar\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;C:\Users\aidar\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.0\junit-jupiter-engine-5.7.0.jar;C:\Users\aidar\.m2\repository\org\junit\platform\junit-platform-engine\1.7.0\junit-platform-engine-1.7.0.jar;C:\Users\aidar\.m2\repository\org\mockito\mockito-core\3.7.7\mockito-core-3.7.7.jar;C:\Users\aidar\.m2\repository\net\bytebuddy\byte-buddy-agent\1.10.19\byte-buddy-agent-1.10.19.jar;C:\Users\aidar\.m2\repository\org\objenesis\objenesis\3.1\objenesis-3.1.jar;C:\Users\aidar\.m2\repository\org\jacoco\jacoco-maven-plugin\0.8.12\jacoco-maven-plugin-0.8.12.jar;C:\Users\aidar\.m2\repository\org\codehaus\plexus\plexus-utils\3.0.24\plexus-utils-3.0.24.jar;C:\Users\aidar\.m2\repository\org\apache\maven\shared\file-management\3.1.0\file-management-3.1.0.jar;C:\Users\aidar\.m2\repository\commons-io\commons-io\2.11.0\commons-io-2.11.0.jar;C:\Users\aidar\.m2\repository\org\apache\maven\reporting\maven-reporting-api\3.0\maven-reporting-api-3.0.jar;C:\Users\aidar\.m2\repository\org\apache\maven\doxia\doxia-sink-api\1.0\doxia-sink-api-1.0.jar;C:\Users\aidar\.m2\repository\org\jacoco\org.jacoco.agent\0.8.12\org.jacoco.agent-0.8.12-runtime.jar;C:\Users\aidar\.m2\repository\org\jacoco\org.jacoco.core\0.8.12\org.jacoco.core-0.8.12.jar;C:\Users\aidar\.m2\repository\org\ow2\asm\asm\9.7\asm-9.7.jar;C:\Users\aidar\.m2\repository\org\ow2\asm\asm-commons\9.7\asm-commons-9.7.jar;C:\Users\aidar\.m2\repository\org\ow2\asm\asm-tree\9.7\asm-tree-9.7.jar;C:\Users\aidar\.m2\repository\org\jacoco\org.jacoco.report\0.8.12\org.jacoco.report-0.8.12.jar;"/>
+    <property name="java.vm.vendor" value="OpenLogic-OpenJDK"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="user.timezone" value="Africa/Casablanca"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="user.country" value="MA"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\bin"/>
+    <property name="sun.java.command" value="C:\Users\aidar\AppData\Local\Temp\surefire7685106284697638644\surefirebooter-20241025152711116_3.jar C:\Users\aidar\AppData\Local\Temp\surefire7685106284697638644 2024-10-25T15-27-10_887-jvmRun1 surefire-20241025152711116_1tmp surefire_0-20241025152711116_2tmp"/>
+    <property name="surefire.test.class.path" value="C:\Users\aidar\Desktop\projects\JAVA\Play-Of-Pro\target\test-classes;C:\Users\aidar\Desktop\projects\JAVA\Play-Of-Pro\target\classes;C:\Users\aidar\.m2\repository\javax\mvc\javax.mvc-api\1.0.0\javax.mvc-api-1.0.0.jar;C:\Users\aidar\.m2\repository\org\hibernate\hibernate-core\5.6.1.Final\hibernate-core-5.6.1.Final.jar;C:\Users\aidar\.m2\repository\org\jboss\logging\jboss-logging\3.4.2.Final\jboss-logging-3.4.2.Final.jar;C:\Users\aidar\.m2\repository\net\bytebuddy\byte-buddy\1.11.20\byte-buddy-1.11.20.jar;C:\Users\aidar\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\aidar\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.1.1.Final\jboss-transaction-api_1.2_spec-1.1.1.Final.jar;C:\Users\aidar\.m2\repository\org\jboss\jandex\2.2.3.Final\jandex-2.2.3.Final.jar;C:\Users\aidar\.m2\repository\com\fasterxml\classmate\1.5.1\classmate-1.5.1.jar;C:\Users\aidar\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\aidar\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.1.2.Final\hibernate-commons-annotations-5.1.2.Final.jar;C:\Users\aidar\.m2\repository\javax\xml\bind\jaxb-api\2.3.1\jaxb-api-2.3.1.jar;C:\Users\aidar\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.1\jaxb-runtime-2.3.1.jar;C:\Users\aidar\.m2\repository\org\glassfish\jaxb\txw2\2.3.1\txw2-2.3.1.jar;C:\Users\aidar\.m2\repository\com\sun\istack\istack-commons-runtime\3.0.7\istack-commons-runtime-3.0.7.jar;C:\Users\aidar\.m2\repository\org\jvnet\staxex\stax-ex\1.8\stax-ex-1.8.jar;C:\Users\aidar\.m2\repository\com\sun\xml\fastinfoset\FastInfoset\1.2.15\FastInfoset-1.2.15.jar;C:\Users\aidar\.m2\repository\javax\persistence\javax.persistence-api\2.2\javax.persistence-api-2.2.jar;C:\Users\aidar\.m2\repository\org\hibernate\validator\hibernate-validator\6.2.0.Final\hibernate-validator-6.2.0.Final.jar;C:\Users\aidar\.m2\repository\jakarta\validation\jakarta.validation-api\2.0.2\jakarta.validation-api-2.0.2.jar;C:\Users\aidar\.m2\repository\org\slf4j\slf4j-api\2.0.12\slf4j-api-2.0.12.jar;C:\Users\aidar\.m2\repository\ch\qos\logback\logback-classic\1.3.3\logback-classic-1.3.3.jar;C:\Users\aidar\.m2\repository\com\sun\mail\javax.mail\1.6.2\javax.mail-1.6.2.jar;C:\Users\aidar\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;C:\Users\aidar\.m2\repository\ch\qos\logback\logback-core\1.3.3\logback-core-1.3.3.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-core\5.3.24\spring-core-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-jcl\5.3.24\spring-jcl-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-context\5.3.24\spring-context-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-aop\5.3.24\spring-aop-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-beans\5.3.24\spring-beans-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-expression\5.3.24\spring-expression-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-jdbc\5.3.24\spring-jdbc-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-orm\5.3.24\spring-orm-5.3.24.jar;C:\Users\aidar\.m2\repository\org\springframework\spring-tx\5.3.24\spring-tx-5.3.24.jar;C:\Users\aidar\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar;C:\Users\aidar\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\aidar\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\aidar\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\aidar\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;C:\Users\aidar\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.0\junit-jupiter-engine-5.7.0.jar;C:\Users\aidar\.m2\repository\org\junit\platform\junit-platform-engine\1.7.0\junit-platform-engine-1.7.0.jar;C:\Users\aidar\.m2\repository\org\mockito\mockito-core\3.7.7\mockito-core-3.7.7.jar;C:\Users\aidar\.m2\repository\net\bytebuddy\byte-buddy-agent\1.10.19\byte-buddy-agent-1.10.19.jar;C:\Users\aidar\.m2\repository\org\objenesis\objenesis\3.1\objenesis-3.1.jar;C:\Users\aidar\.m2\repository\org\jacoco\jacoco-maven-plugin\0.8.12\jacoco-maven-plugin-0.8.12.jar;C:\Users\aidar\.m2\repository\org\codehaus\plexus\plexus-utils\3.0.24\plexus-utils-3.0.24.jar;C:\Users\aidar\.m2\repository\org\apache\maven\shared\file-management\3.1.0\file-management-3.1.0.jar;C:\Users\aidar\.m2\repository\commons-io\commons-io\2.11.0\commons-io-2.11.0.jar;C:\Users\aidar\.m2\repository\org\apache\maven\reporting\maven-reporting-api\3.0\maven-reporting-api-3.0.jar;C:\Users\aidar\.m2\repository\org\apache\maven\doxia\doxia-sink-api\1.0\doxia-sink-api-1.0.jar;C:\Users\aidar\.m2\repository\org\jacoco\org.jacoco.agent\0.8.12\org.jacoco.agent-0.8.12-runtime.jar;C:\Users\aidar\.m2\repository\org\jacoco\org.jacoco.core\0.8.12\org.jacoco.core-0.8.12.jar;C:\Users\aidar\.m2\repository\org\ow2\asm\asm\9.7\asm-9.7.jar;C:\Users\aidar\.m2\repository\org\ow2\asm\asm-commons\9.7\asm-commons-9.7.jar;C:\Users\aidar\.m2\repository\org\ow2\asm\asm-tree\9.7\asm-tree-9.7.jar;C:\Users\aidar\.m2\repository\org\jacoco\org.jacoco.report\0.8.12\org.jacoco.report-0.8.12.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\aidar"/>
+    <property name="user.language" value="fr"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.home" value="C:\Program Files\java\jdk-8.0.422.05-hotspot\jre"/>
+    <property name="basedir" value="C:\Users\aidar\Desktop\projects\JAVA\Play-Of-Pro"/>
+    <property name="file.separator" value="\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\aidar\AppData\Local\Temp\surefire7685106284697638644\surefirebooter-20241025152711116_3.jar;C:\\Users\\aidar\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\lib\resources.jar;C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\lib\rt.jar;C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\lib\sunrsasign.jar;C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\lib\jsse.jar;C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\lib\jce.jar;C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\lib\charsets.jar;C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\lib\jfr.jar;C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\classes"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="1.8.0_422-422-b05"/>
+    <property name="user.name" value="aidar"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\lib\endorsed"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\aidar\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\aidar\AppData\Local\Temp\"/>
+    <property name="java.version" value="1.8.0_422-422"/>
+    <property name="user.dir" value="C:\Users\aidar\Desktop\projects\JAVA\Play-Of-Pro"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="env" value="test"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\java\jdk-8.0.422.05-hotspot;C:\Python312\Scripts\;C:\Python312\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\java\jdk-8.0.422.05-hotspot\bin;C:\Program Files\Maven\apache-maven-3.9.9\bin;C:\Users\aidar\AppData\Local\Microsoft\WindowsApps;C:\Users\aidar\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\aidar\AppData\Roaming\Composer\vendor\bin;C:\Users\aidar\AppData\Local\Microsoft\WinGet\Packages\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe;C:\Users\aidar\AppData\Roaming\npm;;C:\Program Files\JetBrains\IntelliJ IDEA 2022.2.5\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.2.1\bin;;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="OpenLogic-OpenJDK"/>
+    <property name="java.vm.version" value="25.422-b05"/>
+    <property name="java.specification.maintenance.version" value="5"/>
+    <property name="java.ext.dirs" value="C:\Program Files\java\jdk-8.0.422.05-hotspot\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="52.0"/>
+  </properties>
+  <testcase name="testAddAndGetTeam" classname="org.spring.services.TeamServiceIntegrationTest" time="2.611">
+    <system-out><![CDATA[2024-10-25 15:27:13 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: tournamentTest]
+2024-10-25 15:27:13 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.1.Final
+2024-10-25 15:27:13 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-10-25 15:27:14 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-10-25 15:27:14 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+Hibernate: drop table if exists game CASCADE 
+Hibernate: drop table if exists player CASCADE 
+Hibernate: drop table if exists team CASCADE 
+Hibernate: drop table if exists tournament CASCADE 
+Hibernate: drop table if exists tournament_team CASCADE 
+Hibernate: create table game (id bigint generated by default as identity, avgMatchDuration double not null, difficulty varchar(255) not null, name varchar(255) not null, primary key (id))
+Hibernate: create table player (id bigint generated by default as identity, age integer not null, pseudo varchar(255) not null, team_id bigint, primary key (id))
+Hibernate: create table team (id bigint generated by default as identity, name varchar(255) not null, ranking integer, primary key (id))
+Hibernate: create table tournament (id bigint generated by default as identity, break_time_between_matches double, ceremony_time double, end_date date, estimated_duration double, numSpectators integer not null, start_date date, status varchar(255), title varchar(255) not null, game_id bigint not null, primary key (id))
+Hibernate: create table tournament_team (tournament_id bigint not null, team_id bigint not null, primary key (tournament_id, team_id))
+Hibernate: alter table player add constraint FKdvd6ljes11r44igawmpm1mc5s foreign key (team_id) references team
+Hibernate: alter table tournament add constraint FK5iaxeujiox85paiek0n3rh3k8 foreign key (game_id) references game
+Hibernate: alter table tournament_team add constraint FKe2nr7bhms79ni7aa6jjdf3ioj foreign key (team_id) references team
+Hibernate: alter table tournament_team add constraint FKnpt2r8h2uwq1j0iesu13so87p foreign key (tournament_id) references tournament
+2024-10-25 15:27:14 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-10-25 15:27:14 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'tournamentTest'
+2024-10-25 15:27:14 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: tournamentTest]
+2024-10-25 15:27:15 WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-10-25 15:27:15 INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:test;DB_CLOSE_DELAY=-1]
+2024-10-25 15:27:15 INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=sa, password=****}
+2024-10-25 15:27:15 INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2024-10-25 15:27:15 INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-10-25 15:27:15 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists game CASCADE 
+2024-10-25 15:27:15 INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3dbf0c0f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: drop table if exists player CASCADE 
+Hibernate: drop table if exists team CASCADE 
+Hibernate: drop table if exists tournament CASCADE 
+Hibernate: drop table if exists tournament_team CASCADE 
+Hibernate: create table game (id bigint generated by default as identity, avgMatchDuration double not null, difficulty varchar(255) not null, name varchar(255) not null, primary key (id))
+2024-10-25 15:27:15 INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@e798701] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: create table player (id bigint generated by default as identity, age integer not null, pseudo varchar(255) not null, team_id bigint, primary key (id))
+Hibernate: create table team (id bigint generated by default as identity, name varchar(255) not null, ranking integer, primary key (id))
+Hibernate: create table tournament (id bigint generated by default as identity, break_time_between_matches double, ceremony_time double, end_date date, estimated_duration double, numSpectators integer not null, start_date date, status varchar(255), title varchar(255) not null, game_id bigint not null, primary key (id))
+Hibernate: create table tournament_team (tournament_id bigint not null, team_id bigint not null, primary key (tournament_id, team_id))
+Hibernate: alter table player add constraint FKdvd6ljes11r44igawmpm1mc5s foreign key (team_id) references team
+Hibernate: alter table tournament add constraint FK5iaxeujiox85paiek0n3rh3k8 foreign key (game_id) references game
+Hibernate: alter table tournament_team add constraint FKe2nr7bhms79ni7aa6jjdf3ioj foreign key (team_id) references team
+Hibernate: alter table tournament_team add constraint FKnpt2r8h2uwq1j0iesu13so87p foreign key (tournament_id) references tournament
+2024-10-25 15:27:15 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: insert into team (id, name, ranking) values (null, ?, ?)
+Hibernate: select team0_.id as id1_2_, team0_.name as name2_2_, team0_.ranking as ranking3_2_ from team team0_
+Hibernate: delete from team where id=?
+]]></system-out>
+  </testcase>
+  <testcase name="testGetAllTeams" classname="org.spring.services.TeamServiceIntegrationTest" time="0.171">
+    <system-out><![CDATA[2024-10-25 15:27:15 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: tournamentTest]
+2024-10-25 15:27:15 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists game CASCADE 
+Hibernate: drop table if exists player CASCADE 
+Hibernate: drop table if exists team CASCADE 
+Hibernate: drop table if exists tournament CASCADE 
+Hibernate: drop table if exists tournament_team CASCADE 
+Hibernate: create table game (id bigint generated by default as identity, avgMatchDuration double not null, difficulty varchar(255) not null, name varchar(255) not null, primary key (id))
+Hibernate: create table player (id bigint generated by default as identity, age integer not null, pseudo varchar(255) not null, team_id bigint, primary key (id))
+Hibernate: create table team (id bigint generated by default as identity, name varchar(255) not null, ranking integer, primary key (id))
+Hibernate: create table tournament (id bigint generated by default as identity, break_time_between_matches double, ceremony_time double, end_date date, estimated_duration double, numSpectators integer not null, start_date date, status varchar(255), title varchar(255) not null, game_id bigint not null, primary key (id))
+Hibernate: create table tournament_team (tournament_id bigint not null, team_id bigint not null, primary key (tournament_id, team_id))
+Hibernate: alter table player add constraint FKdvd6ljes11r44igawmpm1mc5s foreign key (team_id) references team
+Hibernate: alter table tournament add constraint FK5iaxeujiox85paiek0n3rh3k8 foreign key (game_id) references game
+Hibernate: alter table tournament_team add constraint FKe2nr7bhms79ni7aa6jjdf3ioj foreign key (team_id) references team
+Hibernate: alter table tournament_team add constraint FKnpt2r8h2uwq1j0iesu13so87p foreign key (tournament_id) references tournament
+2024-10-25 15:27:15 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-10-25 15:27:15 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'tournamentTest'
+Hibernate: insert into team (id, name, ranking) values (null, ?, ?)
+Hibernate: insert into team (id, name, ranking) values (null, ?, ?)
+Hibernate: select team0_.id as id1_2_, team0_.name as name2_2_, team0_.ranking as ranking3_2_ from team team0_
+Hibernate: select team0_.id as id1_2_, team0_.name as name2_2_, team0_.ranking as ranking3_2_ from team team0_
+Hibernate: delete from team where id=?
+Hibernate: delete from team where id=?
+]]></system-out>
+  </testcase>
+  <testcase name="testUpdateTeam" classname="org.spring.services.TeamServiceIntegrationTest" time="0.163">
+    <system-out><![CDATA[2024-10-25 15:27:15 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: tournamentTest]
+2024-10-25 15:27:15 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists game CASCADE 
+Hibernate: drop table if exists player CASCADE 
+Hibernate: drop table if exists team CASCADE 
+Hibernate: drop table if exists tournament CASCADE 
+Hibernate: drop table if exists tournament_team CASCADE 
+Hibernate: create table game (id bigint generated by default as identity, avgMatchDuration double not null, difficulty varchar(255) not null, name varchar(255) not null, primary key (id))
+Hibernate: create table player (id bigint generated by default as identity, age integer not null, pseudo varchar(255) not null, team_id bigint, primary key (id))
+Hibernate: create table team (id bigint generated by default as identity, name varchar(255) not null, ranking integer, primary key (id))
+Hibernate: create table tournament (id bigint generated by default as identity, break_time_between_matches double, ceremony_time double, end_date date, estimated_duration double, numSpectators integer not null, start_date date, status varchar(255), title varchar(255) not null, game_id bigint not null, primary key (id))
+Hibernate: create table tournament_team (tournament_id bigint not null, team_id bigint not null, primary key (tournament_id, team_id))
+Hibernate: alter table player add constraint FKdvd6ljes11r44igawmpm1mc5s foreign key (team_id) references team
+Hibernate: alter table tournament add constraint FK5iaxeujiox85paiek0n3rh3k8 foreign key (game_id) references game
+Hibernate: alter table tournament_team add constraint FKe2nr7bhms79ni7aa6jjdf3ioj foreign key (team_id) references team
+Hibernate: alter table tournament_team add constraint FKnpt2r8h2uwq1j0iesu13so87p foreign key (tournament_id) references tournament
+2024-10-25 15:27:15 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-10-25 15:27:15 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'tournamentTest'
+Hibernate: insert into team (id, name, ranking) values (null, ?, ?)
+Hibernate: update team set name=?, ranking=? where id=?
+Hibernate: select team0_.id as id1_2_, team0_.name as name2_2_, team0_.ranking as ranking3_2_ from team team0_
+Hibernate: delete from team where id=?
+]]></system-out>
+  </testcase>
+  <testcase name="testDeleteTeam" classname="org.spring.services.TeamServiceIntegrationTest" time="0.134">
+    <system-out><![CDATA[2024-10-25 15:27:15 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: tournamentTest]
+2024-10-25 15:27:15 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists game CASCADE 
+Hibernate: drop table if exists player CASCADE 
+Hibernate: drop table if exists team CASCADE 
+Hibernate: drop table if exists tournament CASCADE 
+Hibernate: drop table if exists tournament_team CASCADE 
+Hibernate: create table game (id bigint generated by default as identity, avgMatchDuration double not null, difficulty varchar(255) not null, name varchar(255) not null, primary key (id))
+Hibernate: create table player (id bigint generated by default as identity, age integer not null, pseudo varchar(255) not null, team_id bigint, primary key (id))
+Hibernate: create table team (id bigint generated by default as identity, name varchar(255) not null, ranking integer, primary key (id))
+Hibernate: create table tournament (id bigint generated by default as identity, break_time_between_matches double, ceremony_time double, end_date date, estimated_duration double, numSpectators integer not null, start_date date, status varchar(255), title varchar(255) not null, game_id bigint not null, primary key (id))
+Hibernate: create table tournament_team (tournament_id bigint not null, team_id bigint not null, primary key (tournament_id, team_id))
+Hibernate: alter table player add constraint FKdvd6ljes11r44igawmpm1mc5s foreign key (team_id) references team
+Hibernate: alter table tournament add constraint FK5iaxeujiox85paiek0n3rh3k8 foreign key (game_id) references game
+Hibernate: alter table tournament_team add constraint FKe2nr7bhms79ni7aa6jjdf3ioj foreign key (team_id) references team
+Hibernate: alter table tournament_team add constraint FKnpt2r8h2uwq1j0iesu13so87p foreign key (tournament_id) references tournament
+2024-10-25 15:27:15 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-10-25 15:27:15 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'tournamentTest'
+Hibernate: insert into team (id, name, ranking) values (null, ?, ?)
+Hibernate: delete from team where id=?
+Hibernate: select team0_.id as id1_2_0_, team0_.name as name2_2_0_, team0_.ranking as ranking3_2_0_, players1_.team_id as team_id4_1_1_, players1_.id as id1_1_1_, players1_.id as id1_1_2_, players1_.age as age2_1_2_, players1_.pseudo as pseudo3_1_2_, players1_.team_id as team_id4_1_2_, tournament2_.team_id as team_id2_4_3_, tournament3_.id as tourname1_4_3_, tournament3_.id as id1_3_4_, tournament3_.break_time_between_matches as break_ti2_3_4_, tournament3_.ceremony_time as ceremony3_3_4_, tournament3_.end_date as end_date4_3_4_, tournament3_.estimated_duration as estimate5_3_4_, tournament3_.game_id as game_id10_3_4_, tournament3_.numSpectators as numspect6_3_4_, tournament3_.start_date as start_da7_3_4_, tournament3_.status as status8_3_4_, tournament3_.title as title9_3_4_, game4_.id as id1_0_5_, game4_.avgMatchDuration as avgmatch2_0_5_, game4_.difficulty as difficul3_0_5_, game4_.name as name4_0_5_ from team team0_ left outer join player players1_ on team0_.id=players1_.team_id left outer join tournament_team tournament2_ on team0_.id=tournament2_.team_id left outer join tournament tournament3_ on tournament2_.tournament_id=tournament3_.id left outer join game game4_ on tournament3_.game_id=game4_.id where team0_.id=?
+Hibernate: select team0_.id as id1_2_, team0_.name as name2_2_, team0_.ranking as ranking3_2_ from team team0_
+]]></system-out>
+  </testcase>
+</testsuite>

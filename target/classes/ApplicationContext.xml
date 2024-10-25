@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="tournament" />
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver" />
+        <property name="url" value="jdbc:h2:file:./tournament_db;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1" />
+        <property name="username" value="sa" />
+        <property name="password" value="" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+
+    <bean id="teamRepository" class="org.spring.repositories.repositoryImpl.TeamRepositoryImpl"/>
+
+    <!-- Beans for services -->
+    <bean id="teamService" class="org.spring.services.serviceImpl.TeamServiceImpl">
+        <constructor-arg ref="teamRepository" />
+    </bean>
+
+    <bean id="teamMenu" class="org.spring.ConsoleUI.TeamMenu">
+        <constructor-arg ref="teamService"/>
+    </bean>
+
+    <bean id="playerRepository" class="org.spring.repositories.repositoryImpl.PlayerRepositoryImpl"/>
+
+    <bean id="playerService" class="org.spring.services.serviceImpl.PlayerServiceImpl">
+        <constructor-arg ref="playerRepository" />
+    </bean>
+
+    <bean id="playerMenu" class="org.spring.ConsoleUI.PlayerMenu">
+        <constructor-arg ref="playerService"/>
+    </bean>
+
+    <bean id="tournamentRepository" class="org.spring.repositories.repositoryImpl.TournamentRepositoryImpl"/>
+    <bean id="tournamentDao" class="org.spring.dao.daoImpl.TournamentDaoExtension"/>
+
+
+    <bean id="tournamentService" class="org.spring.services.serviceImpl.TournamentServiceImpl">
+        <constructor-arg ref="tournamentRepository" />
+        <constructor-arg ref="tournamentDao" />
+    </bean>
+
+    <bean id="tournamentMenu" class="org.spring.ConsoleUI.TournamentMenu">
+        <constructor-arg ref="tournamentService"/>
+    </bean>
+
+    <bean id="gameRepository" class="org.spring.repositories.repositoryImpl.GameRepositoryImpl"/>
+
+    <bean id="gameService" class="org.spring.services.serviceImpl.GameServiceImpl">
+        <constructor-arg ref="gameRepository"/>
+    </bean>
+
+    <bean id="gameMenu" class="org.spring.ConsoleUI.GameMenu" >
+        <constructor-arg ref="gameService"/>
+    </bean>
+
+
+</beans>
